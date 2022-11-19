@@ -51,7 +51,7 @@ main{
     margin: 0.5%;
     border: 5px solid azure;
     border-radius: 3px;
-    background-color: rgba(109, 196, 250, 0.904);
+    background-image: linear-gradient(to bottom right, lightskyblue, rgb(225, 255, 225));
     display: flex;
     flex-wrap: wrap;
     border: 3px solid rgb(231, 231, 231);
@@ -99,8 +99,11 @@ main{
 
 .card-middle{
     width: 100%;
-    max-height: 50%;
     border-radius: 3px;
+}
+.card-middle, .card-middle img{
+    height: 346px;
+
 }
 
 .card-middle img{

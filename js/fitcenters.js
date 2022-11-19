@@ -1,88 +1,61 @@
-// Pamtimo trenutni div sa slikom na koji je kliknuto zbog listanja
-// var currentImg;
-// Web adresa sa koje ucitavamo slike
-// var photosURL = "https://jsonplaceholder.typicode.com/photos"
-// Spremicemo referencu na 'overlay' div jer ce nam trebati nekoliko puta
-// var overlay = document.getElementById('overlay');
+// var FC_URL = "https://jsonplaceholder.typicode.com/photos"
 
-// Kada se ucita stranica ucitaju se sve slike sa servera
-var request = new XMLHttpRequest();
+
+// Kada se ucita stranica ucitaju se svi FC sa servera
+// var request = new XMLHttpRequest();
+
+load_fitness_centers();
+
+async function load_fitness_centers(){
+    
+    const response_array = await request_all_fitness_centers()
+    // alert("Loading all fitness centers...");
+    setTimeout(() => {
+        finish_fitness_center_rendering(response_array);
+    }, 600);
+
+}
+
+async function finish_fitness_center_rendering(fc_array){
+    // setTimeout(() => {
+        fc_array.map(makeFitCenterCard);
+        // alert("Successfully rendered!");
+        // }, 2000);
+}
+
+async function request_all_fitness_centers(){
+
+    const response_fitness_centers = [
+    {"fc_id":1, "fc_name":"Pumpin' Iron", "fc_address":"Neka Tamo 58a, Novi Sad, 21000", "fc_est":2006, "fc_pic":"../assets/gympic.png", "fc_tr_num":3, "fc_memb_price":2490, "fc_ratings_avg":4.5, "fc_ratings_num":2},
+    {"fc_id":2, "fc_name":"Leg-go!", "fc_address":"Trg Novih Ulica 11, Novi Sad, 21000", "fc_est":1998, "fc_pic":"../assets/gympic2.jpg", "fc_tr_num":2, "fc_memb_price":2099, "fc_ratings_avg":4.0, "fc_ratings_num":3},
+    {"fc_id":3, "fc_name":"Loading...", "fc_address":"Nova Ulicica 11, Novi Sad, 21000", "fc_est":2001, "fc_pic":"../assets/gympic3.png", "fc_tr_num":2, "fc_memb_price":2690, "fc_ratings_avg":4.0, "fc_ratings_num":3},
+    {"fc_id":4, "fc_name":"Armed&Ready", "fc_address":"Trg Novih Ulica 83, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic4.jpg", "fc_tr_num":3, "fc_memb_price":2890, "fc_ratings_avg":5, "fc_ratings_num":1},
+    {"fc_id":5, "fc_name":'Drop \'em!', "fc_address":"Ulica Nova 27b, Novi Sad, 21000", "fc_est":2011, "fc_pic":"../assets/gympic5.jpg", "fc_tr_num":1, "fc_memb_price":1990, "fc_ratings_avg":4.5, "fc_ratings_num":2},
+    {"fc_id":6, "fc_name":"Walk the talk", "fc_address":"Ulica Stara 71, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic6.png", "fc_tr_num":1, "fc_memb_price":1890, "fc_ratings_avg":3.67, "fc_ratings_num":3},
+    {"fc_id":7, "fc_name":"Testosterone", "fc_address":"Ulicica Starija 19a, Novi Sad, 21000", "fc_est":2022, "fc_pic":"../assets/gympic7.jpg", "fc_tr_num":2, "fc_memb_price":2790, "fc_ratings_avg":4.0, "fc_ratings_num":1},
+    {"fc_id":8, "fc_name":"Stronger than yesterday", "fc_address":"Ulicica Skorasnja 29, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic8.png", "fc_tr_num":2, "fc_memb_price":2090, "fc_ratings_avg":4, "fc_ratings_num":1},
+    ];
+
+    return response_fitness_centers;
+}
 
 // request.onreadystatechange = function() {
     // if(this.readyState == 4) {
     //     if(this.status == 200) {
-            // var slike = JSON.parse(request.responseText);
-            // Prikazacemo samo prvih 100 slika, umesto svih 1000
-            for(var i=0; i<=10; i++) {
-                // var slika = slike[i];
-                // ucitajSliku(slika);
-                makeFitCenterCard();
-            }
+            // var fcs = JSON.parse(request.responseText);
+            // finish_fitness_center_rendering(fcs); 
+
         // }else {
         //     console.error('Error loading Fitness Centers.')
         // }
     // }
 // }
 
-// request.open('GET', photosURL);
+// request.open('GET', FC_URL);
 // request.send();
 
-// Kada se klikne bilo gde, ugasimo overlay sa slikom
-// document.body.addEventListener('click', function(e) {
-//     overlay.style.display = 'none';
-// });
-
-// Da se overlay ne bi zatvarao kada se klikne na njega, zaustavimo porpagaciju klikova na njemu
-// overlay.addEventListener('click', function(e) {
-//     e.stopPropagation();
-// });
-
-// Listanje slika ulevo
-// var leftArrow = document.getElementById('leftArrow');
-// leftArrow.addEventListener('click', function(e) {
-//     e.stopPropagation();
-//     listaj('levo');
-// });
-
-// Listanje slika udesno
-// var rightArrow = document.getElementById('rightArrow');
-// rightArrow.addEventListener('click', function(e) {
-//     e.stopPropagation();
-//     listaj('desno');
-// });
-
-/*************************************************************************************
-																	POMOCNE FUNKCIJE
-**************************************************************************************/
-// Kreira novi div sa ucitanom slikom sa servera:
-function ucitajSliku(slika) {
-    var newDiv = document.createElement('div');
-    newDiv.classList.add('previewDiv');
-    // Upisemo u atribut 'data-imageURL' putanju do velike slike, a u 'imageDescription' opis slike
-    newDiv.setAttribute('data-imageURL', slika.url);
-    newDiv.setAttribute('data-imageDescription', slika.title);
-    // Postavimo sliku kao pozadinu
-    newDiv.style.backgroundImage = 'url("' + slika.thumbnailUrl + '")';
-
-    // Odmah cemo povezati i click listener za divove sa slikama
-    // Kada se klikne na njih, treba da prikazemo 'overlay' div sa velikom verzijom slike i naslovom:
-    // newDiv.addEventListener('click', function(e) {
-    //     //Zaustavimo propagaciju klika da se ne bi propagirao do body-a (da ne nestane overlay)
-    //     e.stopPropagation();
-    //     // Postavimo kliknuti div kao trenutni
-    //     currentImg = this;
-
-    //     prikaziVelikuSliku();
-
-    //     overlay.style.display = 'block';
-    // });
-
-    // Novokreirani div ubacimo u div koji ima id 'content'
-    var contentDiv = document.getElementById('content');
-    contentDiv.appendChild(newDiv);
-}
-
-function makeFitCenterCard(){
+function makeFitCenterCard(fc){
+    // setTimeout(()=>{}, 1000);
     var mainContentDiv = document.getElementById('content');
     
     var fitCentDiv = document.createElement('div');
@@ -101,7 +74,7 @@ function makeFitCenterCard(){
     aElement.setAttribute('id', 'see-more-link');
     aElement.setAttribute('href', './fitcenter.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = "Pumpin' iron";
+    aElement.textContent = fc.fc_name;
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
@@ -112,7 +85,7 @@ function makeFitCenterCard(){
     var cardMiddleDiv = document.createElement('div');
     cardMiddleDiv.classList.add('card-middle');
     var cardMiddlePic = document.createElement('img');
-    cardMiddlePic.setAttribute('src', '../assets/gympic.png');
+    cardMiddlePic.setAttribute('src', fc.fc_pic);
     cardMiddleDiv.appendChild(cardMiddlePic);
     cardContentWrapper.appendChild(cardMiddleDiv);
 
@@ -130,34 +103,27 @@ function makeFitCenterCard(){
     cardBottomDiv.appendChild(cardBottomLeftDiv);
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = '4.5';
+    cardBottomRightDiv.textContent = fc.fc_ratings_avg.toFixed(1);
     cardBottomDiv.appendChild(cardBottomRightDiv);
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
-// Otvara overlay sa prikazom verlike verzije slike i opisa
-// function prikaziVelikuSliku() {
-//     // Postavimo src atribut img taga na overlayu koji sadrzi veliku sliku
-//     var imageEl = document.getElementById('imagePlaceholder');
-//     imageEl.setAttribute('src', currentImg.getAttribute('data-imageURL'));
-
-//     // Postavimo naslov slike u paragraf koji sluzi za to
-//     var titleEl = document.getElementById('titlePlaceholder');
-//     titleEl.innerText = currentImg.getAttribute('data-imageDescription');
-// }
-
-// function listaj(smer) {
-//     var sledeci = currentImg.nextElementSibling;
-//     if(smer == 'levo') {
-//         sledeci = currentImg.previousElementSibling;
-//     }
-
-//     if(sledeci != null) {
-//         currentImg = sledeci;
-//         prikaziVelikuSliku();
-//     }
-// }
 
 function scrollToTop(){
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+// all_fitness_centers.push(
+//     )
+// var fitness_center = {
+//     fc_id,
+//     fc_name,
+//     fc_address,
+//     fc_est,
+//     fc_pic,
+//     fc_tr_num,
+//     fc_memb_price,
+//     fc_ratings_avg,
+//     fc_ratings_num
+// }
+// var newFitC = new fitness_center

@@ -1,0 +1,83 @@
+#nav-items-container{
+    width: 100%;
+    background-color: whitesmoke;
+    /* vertical-align: middle; */
+    margin-bottom: 10px;
+    height: 65px;
+    border-radius: 3px;
+    border: 1px solid lightblue;
+    z-index: 1;
+}
+
+.nav-item{
+    background-image: linear-gradient(to bottom right, azure, white);
+    border: 1px solid #fc581c;
+    width: fit-content;
+    margin: auto 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+*::selection, .nav-item a:hover, .nav-item a:focus{
+    color: #1a258d;
+}
+
+.nav-item:hover{
+    background-image: linear-gradient(to bottom right, #e8ebff, azure);
+    border-radius: 5px;
+    border-color: red;
+    transition: all .2s ease-in-out;
+}
+
+.nav-item a, button{
+    text-decoration: none;
+    color: #fc581c;
+    font-size: x-large;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 15px;
+}
+
+.img-div{
+    
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    margin: auto 10px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.img-div img{
+    min-width: 50px;
+    max-width: 57px;
+    min-height: 50px;
+    max-height: 57px;
+    cursor: pointer;
+    color: #fc581c;
+    font-size: x-large;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 50%;
+}
+
+.right-float{
+    float: right;
+    margin-top: 16px;
+    margin-bottom: auto;
+}
+
+img{
+    border: 1px solid lightblue;
+}
+img:hover{
+    border: 1px solid #fc581c;
+}
+
+#sign-out-btn{
+    cursor: pointer;
+}
+
+#profile-img{
+    margin-top: auto;
+}

@@ -1,0 +1,66 @@
+#overlay{
+    width: 100%;
+    height: 99%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0);
+    opacity: 0.8;
+    display: none;
+
+    color: whitesmoke;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#login-form button{
+    background-image: linear-gradient(to bottom right, orange, #fc581d);
+    font-size: xx-large;
+    font-style: italic;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+}
+#login-form button:hover{
+    cursor: pointer;
+    opacity: 1;
+    text-decoration: underline;
+    box-shadow: inset black 20px;
+    /* font-weight: bold;
+    border-width: 3px; */
+}
+#login-form h1{
+    margin-top: 85px;
+    color: whitesmoke;
+    font-weight: bold;
+    text-align: center;
+}
+
+#login-form input{
+    font-style: italic;
+    font-weight: bold;
+    color: gray;
+    font-size: xx-large;
+}
+#login-form input::selection, #login-form input:focus{
+    color: #fc581d;
+}
+#login-form *{
+    display: block;
+    border: 1px solid lightskyblue;
+    border-radius: 3px;
+    margin: 20px auto;
+}
+#login-form p{
+    width: fit-content;
+    text-align: center;
+    font-size: x-large;
+    font-style: italic;
+    cursor: pointer;
+    border: none;
+    border-top: 2px solid white;
+}
+#login-form{
+    background-color: black;
+    opacity: 0.9;
+    border: 1px solid lightskyblue;
+    border-bottom: 3px solid lightskyblue;
+}

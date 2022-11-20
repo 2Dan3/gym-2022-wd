@@ -40,9 +40,9 @@ header ul li button{
     /* border: 1px solid white; */
 }
 header ul li button:hover, header ul li button::selection, header ul li button:focus{
-    background-image: linear-gradient(to bottom left, darkblue, blue);
+    box-shadow: 0 5px 5px black;
     text-decoration: underline;
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 main{
@@ -68,6 +68,7 @@ main{
     border: 2px solid whitesmoke;
 }
 .user-card:hover{
+    box-shadow: 10px 10px 10px rgb(0, 0, 63);
     background-image: linear-gradient(to top left, #fd885d, darkblue);
     transition: all .3s ease-in-out;
 }

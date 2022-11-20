@@ -40,7 +40,8 @@ header ul li button{
     /* border: 1px solid white; */
 }
 header ul li button:hover, header ul li button::selection, header ul li button:focus{
-    background-image: linear-gradient(to bottom left, darkblue, blue);
+    /* background-image: linear-gradient(to bottom left, darkblue, blue); */
+    box-shadow: 0 5px 5px black;
     text-decoration: underline;
     transition: all .3s ease-in-out;
 }
@@ -68,8 +69,12 @@ main{
     border: 2px solid whitesmoke;
 }
 .fit-cent:hover{
+    box-shadow: 10px 10px 10px rgb(0, 0, 63);
     background-image: linear-gradient(to top left, #fd885d, rgb(77, 77, 255));
     transition: all .3s ease-in-out;
+}
+.fit-cent div:hover{
+    color: #fc581d;
 }
 
 .card-content-wrapper{

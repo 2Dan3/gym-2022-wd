@@ -113,6 +113,12 @@ function scrollToTop(){
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function to_users_page(){
+    window.location.href = "users.html";
+}
+function to_homepage(){
+    window.location.href = "homepage.html";
+}
 // all_fitness_centers.push(
 //     )
 // var fitness_center = {

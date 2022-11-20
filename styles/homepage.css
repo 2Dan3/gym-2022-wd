@@ -195,8 +195,8 @@ img{
         margin: auto;
     }
     header ul{
-        width: 80%;
-        margin: auto;
+        width: 85%;
+        margin: unset;
     }
     header ul li{
         border-bottom: solid lightblue 1px;
@@ -212,8 +212,8 @@ img{
     }
 }
 
-@media screen and (max-width:813px) {
+@media screen and (max-width:946px) {
     .fit-cent{
-        width: 86%;
+        width: 74%;
     }
 }

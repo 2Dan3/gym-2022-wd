@@ -16,7 +16,7 @@ header{
 header ul{
     list-style: none;
     margin: auto 0;
-
+    
     /* position: inline; */
     /* float: right; */
     /* margin: 10px; */
@@ -108,13 +108,14 @@ main{
 }
 .card-middle, .card-middle img{
     height: 346px;
-
+    /* margin-left: 12%;
+    margin-right: 12%; */
 }
 
 .card-middle img{
     /* max-height: 40%; */
     border-radius: 20px;
-    width: 99%;
+    width: 90%;
     margin: auto;
 }
 
@@ -199,11 +200,12 @@ img{
         margin: auto;
     }
     header ul{
-        width: 80%;
-        margin: auto;
+        width: 85%;
+        margin: unset;
     }
     header ul li{
         border-bottom: solid lightblue 1px;
+        /* width: 90%; */
     }
     header ul li, header ul li button{
         display: block;
@@ -214,9 +216,12 @@ img{
     .user-card{
         width: 92%;
     }
+    .card-middle, .card-middle img{
+        height: 200px;
+    }
 }
 
-@media screen and (max-width:813px) {
+@media screen and (max-width:946px) {
     .user-card{
         width: 68%;
     }

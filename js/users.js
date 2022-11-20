@@ -68,6 +68,16 @@ function makeUserCard(userObj){
 
     var cardTopDiv = document.createElement('div');
     cardTopDiv.classList.add('card-top');
+    // ban img test
+    var cardTopBanDiv = document.createElement('div');
+    cardTopBanDiv.classList.add('card-top-ban');
+    var banImg = document.createElement('img');
+    banImg.setAttribute('class', 'ban-img');
+    banImg.setAttribute('src', '../assets/banuser.jpg');
+    banImg.addEventListener('click', () => ban_user(userObj.us_username));
+    cardTopBanDiv.appendChild(banImg);
+    cardTopDiv.appendChild(cardTopBanDiv);
+    // 
     var cardTopLeftDiv = document.createElement('div');
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');
@@ -120,4 +130,13 @@ function to_users_page(){
 }
 function to_homepage(){
     window.location.href = "homepage.html";
+}
+
+function ban_user(username){
+    if (confirm("Ban @"+ username + "?")){
+        // *TODO: DELETE HTTP Req
+
+        alert("@" + username + " has been successfully deleted.");
+        location.reload();
+    }
 }

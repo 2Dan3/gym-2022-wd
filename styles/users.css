@@ -91,14 +91,18 @@ main{
     margin: auto;
     width: fit-content;
     height: fit-content;
+    font-style: italic;
 }
 
 .card-top-right{
-
+    font-weight: bold;
+    font-size: large;
+    color: gray;
 }
 
 .card-middle{
-    width: 100%;
+    margin: 10px auto;
+    width: 76%;
     border-radius: 3px;
 }
 .card-middle, .card-middle img{
@@ -129,6 +133,8 @@ main{
     font-size: x-large;
     font-weight: bold;
     margin: auto;
+    font-style: italic;
+    margin-bottom: 8px;
 }
 
 #see-more-link{
@@ -145,7 +151,7 @@ main{
 }
 
 img{
-    border: 1px solid lightblue;
+    /* border: 1px solid lightblue; */
     margin: 10px;
     border-radius: 50%;
 }
@@ -153,11 +159,15 @@ img{
     border: 1px solid #fc581c;
 } */
 
-#star-rating{
-    width: 40px;
+.card-top-ban, .ban-img{
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    border: none;
-    margin-top: 3px;
+    margin-top: 1px;
+}
+.ban-img:hover{
+    border: 1px solid red;
+    cursor: pointer;
 }
 
 #footer{
@@ -198,5 +208,15 @@ img{
         display: block;
         width: 100%;
         margin: auto;
+    }
+
+    .user-card{
+        width: 92%;
+    }
+}
+
+@media screen and (max-width:813px) {
+    .user-card{
+        width: 68%;
     }
 }

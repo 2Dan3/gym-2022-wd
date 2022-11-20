@@ -91,6 +91,7 @@ main{
     margin: auto;
     width: fit-content;
     height: fit-content;
+    font-style: italic;
 }
 
 .card-top-right{
@@ -98,7 +99,8 @@ main{
 }
 
 .card-middle{
-    width: 100%;
+    margin: 10px auto;
+    width: 94%;
     border-radius: 3px;
 }
 .card-middle, .card-middle img{
@@ -129,6 +131,7 @@ main{
     font-size: x-large;
     font-weight: bold;
     margin: auto;
+    font-style: italic;
 }
 
 #see-more-link{
@@ -197,5 +200,15 @@ img{
         display: block;
         width: 100%;
         margin: auto;
+    }
+
+    .fit-cent{
+        width: 92%;
+    }
+}
+
+@media screen and (max-width:813px) {
+    .fit-cent{
+        width: 86%;
     }
 }

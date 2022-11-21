@@ -3,9 +3,6 @@ body{
     /* background-color: lightgrey; */
     background-color: #f4fdff;
 }
-body *::selection{
-    background-color: initial;
-}
 
 main{
     /* min-height: 80vh;

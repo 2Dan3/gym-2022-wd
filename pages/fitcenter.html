@@ -5,12 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness center</title>
+    <!-- *TODO: Isolate commented .css & .js code, into combined .css & combined .js for this particular page -->
+    <link rel="stylesheet" href="../styles/homepage.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="../styles/register.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/training.css">
 
-    <!-- <link rel="stylesheet" href="../styles/homepage.css"> -->
-    <!-- <link rel="stylesheet" href="../styles/header.css"> -->
     <!-- <script defer src="../js/fitcenters.js"></script> -->
+    <script defer src="../js/login.js"></script>
+    <script defer src="../js/register.js"></script>
+    <!-- <script defer src="../js/training.js"></script> -->
+    <script defer src="../js/fitness_center_details.js"></script>
 </head>
 <body>
-    
+    <header id="header">
+        <ul>
+            <li><button class="login-btn">Sign in</button></li>
+            <li><button onclick="to_homepage()">Fitness Places</button></li>
+            <li><button onclick="to_users_page()">Users</button></li>
+            <li><button>?</button></li>
+        </ul>
+    </header>
+
+    <main id="content">
+        <!-- EXAMPLE FITNESS CENTER DISPLAY CARD -->
+        <!--        + ITS TRAININGS              -->
+    </main>
 </body>
 </html>

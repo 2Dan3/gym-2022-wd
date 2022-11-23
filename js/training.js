@@ -27,7 +27,7 @@ async function request_training(wanted_training){
 
     // *TODO: load wanted_training from Firebase URL instead
     const response_training =
-    {"tr_id":1, "tr_name":"Training 1", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":25, "tr_type":"YOGA", "tr_max_capacity":18, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum, aperiam inventore perspiciatis voluptatibus necessitatibus aliquid modi eius, voluptas unde laboriosam nisi itaque architecto aspernatur ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing elit."};
+    {"tr_id":1, "tr_name":"Training 1", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":25, "tr_type":"YOGA", "tr_max_capacity":18, "tr_long_description":"Long Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum, aperiam inventore perspiciatis voluptatibus necessitatibus aliquid modi eius, voluptas unde laboriosam nisi itaque architecto aspernatur ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing elit."};
 
     return response_training;
 }
@@ -53,6 +53,7 @@ function makeTrainingCard(training){
     
     var trainingDiv = document.createElement('div');
     trainingDiv.classList.add('training-card');
+    trainingDiv.style.width = '60vh';
     mainContentDiv.appendChild(trainingDiv);
 
     var cardContentWrapper = document.createElement('div');
@@ -85,10 +86,10 @@ function makeTrainingCard(training){
 
     // *TODO: Uncomment & css style cardLongDescription:
 
-    // var cardLongDescription = document.createElement('div');
-    // cardLongDescription.classList.add('card-long-description');
-    // cardLongDescription.textContent = training.tr_long_description;
-    // cardContentWrapper.appendChild(cardLongDescription);
+    var cardLongDescription = document.createElement('div');
+    cardLongDescription.classList.add('card-long-description');
+    cardLongDescription.textContent = training.tr_long_description;
+    cardContentWrapper.appendChild(cardLongDescription);
 
     var cardBottomDiv = document.createElement('div');
     cardBottomDiv.classList.add('card-bottom');

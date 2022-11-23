@@ -116,7 +116,7 @@ function makeFitCenterCard(fc){
     cardBottomDiv.appendChild(cardBottomThirdDiv);
     var cardBottomFourthDiv = document.createElement('div');
     cardBottomFourthDiv.classList.add('card-bottom-fourth');
-    cardBottomFourthDiv.textContent = fc.fc_tr_num + " trainings";
+    cardBottomFourthDiv.textContent = "< " + fc.fc_tr_num + " trainings >";
     // 
     cardBottomFourthDiv.onclick = () => { 
         cardBottomFourthDiv.style.display = 'none';

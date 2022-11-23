@@ -1,14 +1,10 @@
 body{
-    /* background-color: whitesmoke */
-    /* background-color: lightgrey; */
     background-color: #f4fdff;
 }
 
 main{
-    /* min-height: 80vh;
-    height: 80vh; */
+    /* min-height: 80vh; */
     margin: 0.5%;
-    border: 5px solid azure;
     border-radius: 3px;
     background-image: linear-gradient(to bottom right, lightskyblue, rgb(225, 255, 225));
     display: flex;
@@ -31,7 +27,6 @@ main{
     width: 48vh;
     max-width: 90%;
     margin: 10px auto;
-    /* margin: 10px 10px; */
     background-image: linear-gradient(to top left, #fd885d, lightblue);
     border-radius: 5px;
     border: 2px solid whitesmoke;
@@ -53,7 +48,6 @@ main{
 
 .card-top{
     width: 100%;
-    /* height: fit-content; */
     height: fit-content;
     display: flex;
     flex-wrap: wrap;
@@ -90,10 +84,7 @@ main{
     margin: auto;
 }
 
-.card-short-description{
-
-}
-.card-long-description{
+.card-long-description, .card-short-description{
     border: 1px solid lightblue;
     border-radius: 3px;
     width: 94%;
@@ -107,10 +98,6 @@ main{
     border: 1px solid lightblue;
     width: 99%;
     height: fit-content;
-    /* height: fit-content; */
-    /* display: flex;
-    flex-wrap: wrap; */
-    /* flex-wrap: no-wrap; */
 }
 
 .card-bottom-left, .card-bottom-right{
@@ -121,7 +108,6 @@ main{
     font-weight: bold;
     margin: auto 5px;
     text-align: start;
-    /* font-style: italic; */
 }
 .card-bottom-left{
     color: #fc581d;
@@ -129,7 +115,6 @@ main{
 .card-bottom-right{
     text-align: end;
     font-style: italic;
-    /* border-top: 1px ridge lightskyblue; */
 }
 
 #see-more-link{
@@ -173,16 +158,3 @@ img{
 #scroller:hover{
     border: 3px solid white;
 }
-
-
-/* @media screen and (max-width:600px) {
-    .training-card{
-        width: 92%;
-    }
-}
-
-@media screen and (max-width:946px) {
-    .training-card{
-        width: 74%;
-    }
-} */

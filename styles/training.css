@@ -16,10 +16,20 @@ main{
     border: 3px solid rgb(231, 231, 231);
 }
 
+#trainings-list{
+    width: 100vh;
+    max-width: 100%;
+    margin: auto;
+    border-left: 3px ridge whitesmoke;
+    border-right: 3px ridge whitesmoke;
+    border-radius: 3px;
+}
+
 .training-card{
     /* min-height: 100px; */
     height: fit-content;
     width: 48vh;
+    max-width: 90%;
     margin: 10px auto;
     /* margin: 10px 10px; */
     background-image: linear-gradient(to top left, #fd885d, lightblue);
@@ -104,7 +114,8 @@ main{
 }
 
 .card-bottom-left, .card-bottom-right{
-    /* width: 49%; */
+    display: block;
+    width: 94%;
     color: gray;
     font-size: xx-large;
     font-weight: bold;

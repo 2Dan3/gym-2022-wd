@@ -98,6 +98,16 @@ main{
     margin: auto;
     font-style: italic;
 }
+.card-bottom-third{
+    margin-top: 15px;
+    border-top: 1px ridge gray;
+}
+.card-bottom-fourth:hover{
+    transition: all .3s ease-in-out;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 #see-more-link{
     width: fit-content;

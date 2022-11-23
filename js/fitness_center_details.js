@@ -1,5 +1,6 @@
-var main_content = document.getElementById('content');
-main_content.style.display = 'block';
+// var main_content = document.getElementById('content');
+// main_content.style.display = 'block';
+
 // var FC_URL = "https://jsonplaceholder.typicode.com/photos"
 // var TRAINING_URL = "https://jsonplaceholder.typicode.com/photos"
 
@@ -55,7 +56,14 @@ function makeFitCenterCard(fc){
     
     var fitCentDiv = document.createElement('div');
     fitCentDiv.classList.add('fit-cent');
+    fitCentDiv.style.width = '56vh';
     mainContentDiv.appendChild(fitCentDiv);
+    
+    // TRAINING LIST IS INITIALIZED ONCE
+    var trainingsListDiv = document.createElement('div');
+    trainingsListDiv.setAttribute('id', 'trainings-list');
+    trainingsListDiv.style.display = 'none';
+    mainContentDiv.appendChild(trainingsListDiv);
 
     var cardContentWrapper = document.createElement('div');
     cardContentWrapper.classList.add('card-content-wrapper');
@@ -110,7 +118,14 @@ function makeFitCenterCard(fc){
     cardBottomFourthDiv.classList.add('card-bottom-fourth');
     cardBottomFourthDiv.textContent = fc.fc_tr_num + " trainings";
     // 
-    cardBottomFourthDiv.onclick = () => { load_trainings(null); };
+    cardBottomFourthDiv.onclick = () => { 
+        cardBottomFourthDiv.style.display = 'none';
+        trainingsListDiv.style.display = 'block';
+        load_trainings(null);
+        
+        // fitCentDiv.style.position = 'fixed';
+        // fitCentDiv.style.left = '5%'
+    };
     cardBottomDiv.appendChild(cardBottomFourthDiv);
 
     cardContentWrapper.appendChild(cardBottomDiv);
@@ -138,20 +153,21 @@ async function request_all_trainings(wanted_trainings){
 
     // *TODO: load wanted_trainings from firebase URL instead
     const response_trainings = [
-    {"tr_id":1, "tr_name":"Training 1", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":25, "tr_type":"YOGA", "tr_max_capacity":18, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum, aperiam inventore perspiciatis voluptatibus necessitatibus aliquid modi eius, voluptas unde laboriosam nisi itaque architecto aspernatur ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
-    {"tr_id":2, "tr_name":"Training 2", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":35, "tr_type":"BODY PUMP", "tr_max_capacity":24, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum, aperiam inventore perspiciatis voluptatibus necessitatibus aliquid modi eius, voluptas unde laboriosam nisi itaque architecto aspernatur ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing elit."},
+    {"tr_id":1, "tr_name":"Training 1", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":25, "tr_type":"YOGA", "tr_max_capacity":18, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum."},
+    {"tr_id":2, "tr_name":"Training 2", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":35, "tr_type":"BODY PUMP", "tr_max_capacity":24, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum."},
+    {"tr_id":3, "tr_name":"Training 3", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":45, "tr_type":"AEROBIC", "tr_max_capacity":32, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum."},
     ];
 
     return response_trainings;
 }
 
 function makeTrainingCard(training){
-    // setTimeout(()=>{}, 1000);
-    var mainContentDiv = document.getElementById('content');
+    // TRAINING LIST IS FILLED HERE
+    var trainingsListDiv = document.getElementById('trainings-list');
     
     var trainingDiv = document.createElement('div');
     trainingDiv.classList.add('training-card');
-    mainContentDiv.appendChild(trainingDiv);
+    trainingsListDiv.appendChild(trainingDiv);
 
     var cardContentWrapper = document.createElement('div');
     cardContentWrapper.classList.add('card-content-wrapper');

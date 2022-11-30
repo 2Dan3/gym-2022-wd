@@ -27,9 +27,6 @@ async function request_all_users(){
 
     const response_users = [
     {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"30-06-1966", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
-    {"us_name":"Zyzz", "us_surname":"King", "us_address":"Nova Ulicica 23, Novi Sad, 21000", "us_birth":"11-10-1989", "us_pic":"../assets/defaultuser.png", "us_phone":"+38164987321", "us_email":"zyzzy@yahoo.com", "us_username":"YungZz", "us_password":"ZyZZy*P4sS975"},
-    {"us_name":"Arnold", "us_surname":"Schwarzenegger", "us_address":"Trg Novih Ulica 32, Novi Sad, 21000", "us_birth":"30-06-1947", "us_pic":"../assets/defaultuser.png", "us_phone":"+381659993332", "us_email":"arny@hotmail.com", "us_username":"ArnySchwarz1", "us_password":"ArNy*P4sS420"},
-    {"us_name":"Andrew", "us_surname":"Tate", "us_address":"Ulica Stara 8, Novi Sad, 21000", "us_birth":"14-12-1986", "us_pic":"../assets/defaultuser.png", "us_phone":"+381698887773", "us_email":"tate@yahoo.com", "us_username":"TaTe28", "us_password":"TaTe*P4sS4220"},
     ];
 
     return response_users;
@@ -56,6 +53,8 @@ function makeUserCard(userObj){
     
     var userDiv = document.createElement('div');
     userDiv.classList.add('user-card');
+    userDiv.style.width = "70%";
+    userDiv.style.maxWidth = "60vh";
     mainContentDiv.appendChild(userDiv);
 
     var cardContentWrapper = document.createElement('div');
@@ -65,27 +64,27 @@ function makeUserCard(userObj){
     var cardTopDiv = document.createElement('div');
     cardTopDiv.classList.add('card-top');
     // ban img test
-    var cardTopBanDiv = document.createElement('div');
-    cardTopBanDiv.classList.add('card-top-ban');
-    var banImg = document.createElement('img');
-    banImg.setAttribute('class', 'ban-img');
-    banImg.setAttribute('src', '../assets/banuser.jpg');
-    banImg.addEventListener('click', () => ban_user(userObj.us_username));
-    cardTopBanDiv.appendChild(banImg);
-    cardTopDiv.appendChild(cardTopBanDiv);
+    // var cardTopBanDiv = document.createElement('div');
+    // cardTopBanDiv.classList.add('card-top-ban');
+    // var banImg = document.createElement('img');
+    // banImg.setAttribute('class', 'ban-img');
+    // banImg.setAttribute('src', '../assets/banuser.jpg');
+    // banImg.addEventListener('click', () => ban_user(userObj.us_username));
+    // cardTopBanDiv.appendChild(banImg);
+    // cardTopDiv.appendChild(cardTopBanDiv);
     // 
     var cardTopLeftDiv = document.createElement('div');
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');
     aElement.setAttribute('id', 'see-more-link');
-    aElement.setAttribute('href', './user.html');
+    // aElement.setAttribute('href', './user.html');
     // Alternatively (for older browsers) aElement.innerHtml
     aElement.textContent = "@".concat(userObj.us_username);
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
     cardTopRightDiv.classList.add('card-top-right');
-    // cardTopRightDiv.textContent = userObj.us_birth;
+    cardTopRightDiv.textContent = userObj.us_birth;
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
@@ -98,11 +97,11 @@ function makeUserCard(userObj){
 
     var cardBottomDiv = document.createElement('div');
     cardBottomDiv.classList.add('card-bottom');
-    // var cardBottomLeftDiv = document.createElement('div');
-    // cardBottomLeftDiv.classList.add('card-bottom-left');
-    // cardBottomLeftDiv.textContent = userObj.us_phone;
-    // cardBottomDiv.appendChild(cardBottomLeftDiv);
+    var cardBottomLeftDiv = document.createElement('div');
+    cardBottomLeftDiv.classList.add('card-bottom-left');
+    cardBottomLeftDiv.textContent = userObj.us_phone;
     
+    cardBottomDiv.appendChild(cardBottomLeftDiv);
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
     cardBottomRightDiv.textContent = userObj.us_email;

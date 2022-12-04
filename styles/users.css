@@ -177,7 +177,7 @@ img{
     height: fit-content;
     width: fit-content;
 }
-#side-nav{
+#side-nav, #side-nav img:hover{
     box-shadow: 2px 4px 5px 5px black;
     text-decoration: underline;
     transition: all .3s ease-in-out;
@@ -189,6 +189,7 @@ img{
     cursor: pointer;
     margin: 10px;
     border: none;
+    box-shadow: 1px 2px 3px 2px black;
 }
 #img-separator-side-nav{
     background-color: #fc581d;
@@ -204,10 +205,15 @@ img{
     .card-middle, .card-middle img{
         height: 200px;
     }
+    #side-nav, #side-nav *{
+        scale: .8;
+        top: 15%;
+    }
 }
 
 @media screen and (max-width:946px) {
     .user-card{
         width: 68%;
+        max-width: 530px;
     }
 }

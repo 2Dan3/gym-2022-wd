@@ -22,7 +22,7 @@ main{
     width: 48vh;
     margin: 10px auto;
     /* margin: 10px 10px; */
-    background-image: linear-gradient(to top left, #fd885d, lightblue);
+    background-image: linear-gradient(to top left, #fd885d, darkblue);
     border-radius: 5px;
     border: 2px solid whitesmoke;
 }

@@ -7,6 +7,7 @@
     <title>Users</title>
 
     <link rel="stylesheet" href="../styles/users.css">
+    <link rel="stylesheet" href="../styles/homepage.css">
     <link rel="stylesheet" href="../styles/login.css">
     <link rel="stylesheet" href="../styles/register.css">
     <link rel="stylesheet" href="../styles/header.css">
@@ -20,14 +21,26 @@
         <ul>
             <li><button class="login-btn">Sign in</button></li>
             <li><button onclick="to_homepage()">Fitness Places</button></li>
-            <li><button onclick="to_users_page()">Users</button></li>
-            <li><button>?</button></li>
+            <li><button onclick="to_users_page()">Users & Gyms</button></li>
+            <!-- <li><button>?</button></li> -->
         </ul>
     </header>
 
     <main id="content">
-        <!-- USER DISPLAY CARD -->
-        <!-- ... -->
+        <div id="side-nav">
+            <img id="gym-scroll" src="../assets/weight.jpg" alt="Gyms">
+            <div id="img-separator-side-nav"></div>
+            <img id="user-scroll" src="../assets/users.png" alt="Users">
+        </div>
+        <!-- USERS' CARDS -->
+        <div id="users-content">
+            <!-- ... -->
+        </div>
+        <div id="content-separator"></div>
+        <!-- GYMS' CARDS -->
+        <div id="fitness-centers-content">
+            <!-- ... -->
+        </div>    
     </main>
 
     <div id="footer"><button id="scroller" onclick="scrollToTop()">Back to the Top</button></div>

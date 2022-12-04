@@ -11,8 +11,8 @@ main{
     border: 5px solid azure;
     border-radius: 3px;
     background-image: linear-gradient(to bottom right, lightskyblue, rgb(225, 255, 225));
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
     border: 3px solid rgb(231, 231, 231);
 }
 
@@ -118,12 +118,12 @@ img{
 }
 
 .card-top-ban, .ban-img, .card-top-edit, .edit-img{
+    margin-top: 1px;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin-top: 1px;
 }
-.ban-img:hover, .edit-img:hover{
+.ban-img, .edit-img{
     border: 1px solid red;
     cursor: pointer;
 }
@@ -158,6 +158,44 @@ img{
     border: 3px solid white;
 }
 
+#content-separator{
+    height: 7vh;
+    background-color: whitesmoke;
+    width: 96%;
+    margin: auto;
+    border-radius: 40px;
+    border: 2px solid lightskyblue;
+}
+
+#side-nav{
+    background-color: whitesmoke;
+    border: 3px ridge #fc581d;
+    border-radius: 3px;
+    position: fixed;
+    top: 5%;
+    right: 2%;
+    height: fit-content;
+    width: fit-content;
+}
+#side-nav{
+    box-shadow: 2px 4px 5px 5px black;
+    text-decoration: underline;
+    transition: all .3s ease-in-out;
+}
+#side-nav img{
+    display: block;
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 10px;
+    border: none;
+}
+#img-separator-side-nav{
+    background-color: #fc581d;
+    width: 90%;
+    height: 2px;
+    margin: auto;
+}
 
 @media screen and (max-width:600px) {
     .user-card{

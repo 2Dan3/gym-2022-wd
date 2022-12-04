@@ -26,10 +26,10 @@ async function finish_users_rendering(users_array){
 async function request_all_users(){
 
     const response_users = [
-    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"30-06-1966", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
-    {"us_name":"Zyzz", "us_surname":"King", "us_address":"Nova Ulicica 23, Novi Sad, 21000", "us_birth":"11-10-1989", "us_pic":"../assets/defaultuser.png", "us_phone":"+38164987321", "us_email":"zyzzy@yahoo.com", "us_username":"YungZz", "us_password":"ZyZZy*P4sS975"},
-    {"us_name":"Arnold", "us_surname":"Schwarzenegger", "us_address":"Trg Novih Ulica 32, Novi Sad, 21000", "us_birth":"30-06-1947", "us_pic":"../assets/defaultuser.png", "us_phone":"+381659993332", "us_email":"arny@hotmail.com", "us_username":"ArnySchwarz1", "us_password":"ArNy*P4sS420"},
-    {"us_name":"Andrew", "us_surname":"Tate", "us_address":"Ulica Stara 8, Novi Sad, 21000", "us_birth":"14-12-1986", "us_pic":"../assets/defaultuser.png", "us_phone":"+381698887773", "us_email":"tate@yahoo.com", "us_username":"TaTe28", "us_password":"TaTe*P4sS4220"},
+    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"1966-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
+    {"us_name":"Zyzz", "us_surname":"King", "us_address":"Nova Ulicica 23, Novi Sad, 21000", "us_birth":"1989-10-11", "us_pic":"../assets/defaultuser.png", "us_phone":"+38164987321", "us_email":"zyzzy@yahoo.com", "us_username":"YungZz", "us_password":"ZyZZy*P4sS975"},
+    {"us_name":"Arnold", "us_surname":"Schwarzenegger", "us_address":"Trg Novih Ulica 32, Novi Sad, 21000", "us_birth":"1947-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381659993332", "us_email":"arny@hotmail.com", "us_username":"ArnySchwarz1", "us_password":"ArNy*P4sS420"},
+    {"us_name":"Andrew", "us_surname":"Tate", "us_address":"Ulica Stara 8, Novi Sad, 21000", "us_birth":"1986-12-14", "us_pic":"../assets/defaultuser.png", "us_phone":"+381698887773", "us_email":"tate@yahoo.com", "us_username":"TaTe28", "us_password":"TaTe*P4sS4220"},
     ];
 
     return response_users;

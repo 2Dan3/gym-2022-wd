@@ -26,7 +26,7 @@ async function finish_users_rendering(users_array){
 async function request_all_users(){
 
     const response_users = [
-    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"30-06-1966", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
+    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"1966-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
     ];
 
     return response_users;
@@ -63,16 +63,16 @@ function makeUserCard(userObj){
 
     var cardTopDiv = document.createElement('div');
     cardTopDiv.classList.add('card-top');
-    // ban img test
-    // var cardTopBanDiv = document.createElement('div');
-    // cardTopBanDiv.classList.add('card-top-ban');
-    // var banImg = document.createElement('img');
-    // banImg.setAttribute('class', 'ban-img');
-    // banImg.setAttribute('src', '../assets/banuser.jpg');
-    // banImg.addEventListener('click', () => ban_user(userObj.us_username));
-    // cardTopBanDiv.appendChild(banImg);
-    // cardTopDiv.appendChild(cardTopBanDiv);
-    // 
+    
+    var cardTopEditDiv = document.createElement('div');
+    cardTopEditDiv.classList.add('card-top-edit');
+    var editImg = document.createElement('img');
+    editImg.setAttribute('class', 'edit-img');
+    editImg.setAttribute('src', '../assets/edit.jpg');
+    editImg.addEventListener('click', () => { window.location.href = "edituser.html";});
+    cardTopEditDiv.appendChild(editImg);
+    cardTopDiv.appendChild(cardTopEditDiv);
+    
     var cardTopLeftDiv = document.createElement('div');
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');

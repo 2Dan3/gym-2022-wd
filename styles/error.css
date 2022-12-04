@@ -1,0 +1,34 @@
+body{
+    background-image: linear-gradient(to bottom right, black, darkblue);
+}
+body *{
+    text-align: center;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: darkblue;
+}
+body *::selection{
+    text-decoration: none;
+}
+#content{
+    background-color: whitesmoke;
+    width: 82%;
+    max-width: 1200px;
+    margin: auto;
+    height: 70vh;
+    margin-bottom: 120px;
+    border-radius: 10%;
+}
+h1{
+    font-size: 200px;
+}
+h2{
+    font-size: 50px;
+}
+a{
+    font-size: 30px;
+    background-color: rgb(228, 228, 228);
+    padding: 10px 20px;
+    border-radius: 10%;
+    border: 1px ridge whitesmoke;
+}

@@ -28,8 +28,8 @@ async function request_all_fitness_centers(){
     const response_fitness_centers = [
     {"fc_id":1, "fc_name":"Pumpin' Iron", "fc_address":"Neka Tamo 58a, Novi Sad, 21000", "fc_est":2006, "fc_pic":"../assets/gympic.png", "fc_tr_num":3, "fc_memb_price":2490, "fc_ratings_avg":4.5, "fc_ratings_num":2},
     {"fc_id":2, "fc_name":"Leg-go!", "fc_address":"Trg Novih Ulica 11, Novi Sad, 21000", "fc_est":1998, "fc_pic":"../assets/gympic2.jpg", "fc_tr_num":2, "fc_memb_price":2099, "fc_ratings_avg":4.0, "fc_ratings_num":3},
-    {"fc_id":3, "fc_name":"Loading...", "fc_address":"Nova Ulicica 11, Novi Sad, 21000", "fc_est":2001, "fc_pic":"../assets/gympic3.png", "fc_tr_num":2, "fc_memb_price":2690, "fc_ratings_avg":4.0, "fc_ratings_num":3},
-    {"fc_id":4, "fc_name":"Armed&Ready", "fc_address":"Trg Novih Ulica 83, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic4.jpg", "fc_tr_num":3, "fc_memb_price":2890, "fc_ratings_avg":5, "fc_ratings_num":1},
+    {"fc_id":3, "fc_name":"Load", "fc_address":"Nova Ulicica 11, Novi Sad, 21000", "fc_est":2001, "fc_pic":"../assets/gympic3.png", "fc_tr_num":2, "fc_memb_price":2690, "fc_ratings_avg":4.0, "fc_ratings_num":3},
+    {"fc_id":4, "fc_name":"Armed&Ready", "fc_address":"Trg Novih Ulica 83, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic4.png", "fc_tr_num":3, "fc_memb_price":2890, "fc_ratings_avg":5, "fc_ratings_num":1},
     {"fc_id":5, "fc_name":'Drop \'em!', "fc_address":"Ulica Nova 27b, Novi Sad, 21000", "fc_est":2011, "fc_pic":"../assets/gympic5.jpg", "fc_tr_num":1, "fc_memb_price":1990, "fc_ratings_avg":4.5, "fc_ratings_num":2},
     {"fc_id":6, "fc_name":"Walk the talk", "fc_address":"Ulica Stara 71, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic6.png", "fc_tr_num":1, "fc_memb_price":1890, "fc_ratings_avg":3.67, "fc_ratings_num":3},
     {"fc_id":7, "fc_name":"Testosterone", "fc_address":"Ulicica Starija 19a, Novi Sad, 21000", "fc_est":2022, "fc_pic":"../assets/gympic7.jpg", "fc_tr_num":2, "fc_memb_price":2790, "fc_ratings_avg":4.0, "fc_ratings_num":1},

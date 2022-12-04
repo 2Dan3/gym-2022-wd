@@ -193,7 +193,7 @@ function makeTrainingCard(training){
     var cardMiddleDiv = document.createElement('div');
     cardMiddleDiv.classList.add('card-middle');
     var cardMiddlePic = document.createElement('img');
-    cardMiddlePic.setAttribute('src', '../assets/gympic4.jpg');
+    cardMiddlePic.setAttribute('src', '../assets/training.jpg');
     cardMiddleDiv.appendChild(cardMiddlePic);
     cardContentWrapper.appendChild(cardMiddleDiv);
 

@@ -71,6 +71,16 @@ function makeFitCenterCard(fc){
 
     var cardTopDiv = document.createElement('div');
     cardTopDiv.classList.add('card-top');
+
+    var cardTopEditDiv = document.createElement('div');
+    cardTopEditDiv.classList.add('card-top-edit');
+    var editImg = document.createElement('img');
+    editImg.setAttribute('class', 'edit-img');
+    editImg.setAttribute('src', '../assets/edit.jpg');
+    editImg.addEventListener('click', () => { window.location.href = "editfitnesscenter.html";});
+    cardTopEditDiv.appendChild(editImg);
+    cardTopDiv.appendChild(cardTopEditDiv);
+
     var cardTopLeftDiv = document.createElement('div');
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');
@@ -114,6 +124,10 @@ function makeFitCenterCard(fc){
     cardBottomThirdDiv.classList.add('card-bottom-third');
     cardBottomThirdDiv.textContent = fc.fc_address;
     cardBottomDiv.appendChild(cardBottomThirdDiv);
+    var cardBottomPriceDiv = document.createElement('div');
+    cardBottomPriceDiv.classList.add('card-bottom-price');
+    cardBottomPriceDiv.textContent = "Membership price: " + fc.fc_memb_price;
+    cardBottomDiv.appendChild(cardBottomPriceDiv);
     var cardBottomFourthDiv = document.createElement('div');
     cardBottomFourthDiv.classList.add('card-bottom-fourth');
     cardBottomFourthDiv.textContent = "< " + fc.fc_tr_num + " trainings >";

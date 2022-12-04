@@ -54,9 +54,14 @@ function makeFitCenterCard(fc){
     fitCentForm.style.width = '56vh';
     fitCentForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert("Changes are saved!");
+        if (window.confirm("Are you sure you want to save the changes?") == true) {
+            alert("Changes are saved!");
+            // TODO: call save func
+        }else{
+            alert("Changes are not saved!");
+        }
         to_homepage();
-    })
+    });
 
     var nameFCinput = document.getElementById('see-more-link');
     nameFCinput.value = fc.fc_name;

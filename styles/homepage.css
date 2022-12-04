@@ -145,6 +145,19 @@ img{
     cursor: pointer;
 }
 
+#submit-edit{
+    background-color: darkblue;
+    color: whitesmoke;
+    font-size: x-large;
+    cursor: pointer;
+    margin: 10px 30px;
+}
+#submit-edit:hover{
+    box-shadow: 0 5px 5px black;
+    text-decoration: underline;
+    transition: all .3s ease-in-out;
+}
+
 #footer{
     margin: 0.5%;
     background-color: lightblue;

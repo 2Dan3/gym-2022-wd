@@ -65,3 +65,11 @@
     border: 1px solid lightskyblue;
     border-bottom: 3px solid lightskyblue;
 }
+#close-hint-text{
+    position: absolute;
+    top: 70%;
+    left: 45%;
+    right: 50%;
+    color: lightgrey;
+    font-weight: bold;
+}

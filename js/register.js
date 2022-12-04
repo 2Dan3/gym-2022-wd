@@ -55,6 +55,11 @@ var register_buttons = document.getElementsByClassName('register-btn');
     }
 );
 
+var closeHintText = document.createElement('div');
+closeHintText.setAttribute('id', 'close-hint-text');
+closeHintText.textContent = 'Hide'
+overlay.appendChild(closeHintText);
+
 overlay.addEventListener('click', (e) => {
      overlay.style.display = 'none';
      registerform.reset();

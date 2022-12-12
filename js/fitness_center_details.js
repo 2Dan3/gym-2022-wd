@@ -237,7 +237,7 @@ function to_users_page(){
     window.location.href = "users.html";
 }
 function to_homepage(){
-    window.location.href = "homepage.html";
+    window.location.href = "index.html";
 }
 // all_fitness_centers.push(
 //     )

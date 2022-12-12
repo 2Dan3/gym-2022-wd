@@ -49,6 +49,7 @@ main{
     display: flex;
     flex-wrap: wrap;
     /* flex-wrap: no-wrap; */
+    font-size: xx-large;
 }
 
 .card-top-left{
@@ -60,7 +61,7 @@ main{
 
 .card-top-right{
     font-weight: bold;
-    font-size: large;
+    font-size: x-large;
     color: gray;
 }
 

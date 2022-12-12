@@ -100,12 +100,12 @@ function makeUserCard(userObj){
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
-    var cardMiddleDiv = document.createElement('div');
-    cardMiddleDiv.classList.add('card-middle');
-    var cardMiddlePic = document.createElement('img');
-    cardMiddlePic.setAttribute('src', userObj.us_pic);
-    cardMiddleDiv.appendChild(cardMiddlePic);
-    cardContentWrapper.appendChild(cardMiddleDiv);
+    // var cardMiddleDiv = document.createElement('div');
+    // cardMiddleDiv.classList.add('card-middle');
+    // var cardMiddlePic = document.createElement('img');
+    // cardMiddlePic.setAttribute('src', userObj.us_pic);
+    // cardMiddleDiv.appendChild(cardMiddlePic);
+    // cardContentWrapper.appendChild(cardMiddleDiv);
 
     var cardBottomDiv = document.createElement('div');
     cardBottomDiv.classList.add('card-bottom');
@@ -235,12 +235,12 @@ function makeFitCenterCard(fc){
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
-    var cardMiddleDiv = document.createElement('div');
-    cardMiddleDiv.classList.add('card-middle');
-    var cardMiddlePic = document.createElement('img');
-    cardMiddlePic.setAttribute('src', fc.fc_pic);
-    cardMiddleDiv.appendChild(cardMiddlePic);
-    cardContentWrapper.appendChild(cardMiddleDiv);
+    // var cardMiddleDiv = document.createElement('div');
+    // cardMiddleDiv.classList.add('card-middle');
+    // var cardMiddlePic = document.createElement('img');
+    // cardMiddlePic.setAttribute('src', fc.fc_pic);
+    // cardMiddleDiv.appendChild(cardMiddlePic);
+    // cardContentWrapper.appendChild(cardMiddleDiv);
 
     var cardBottomDiv = document.createElement('div');
     cardBottomDiv.classList.add('card-bottom');

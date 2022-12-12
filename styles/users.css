@@ -56,7 +56,7 @@ main{
 
 .card-top-right{
     font-weight: bold;
-    font-size: large;
+    font-size: xx-large;
     color: gray;
 }
 
@@ -79,7 +79,7 @@ main{
 }
 
 .card-bottom{
-    border: 1px solid lightblue;
+    /* border: 1px solid lightblue; */
     width: 99%;
     height: fit-content;
     /* height: fit-content; */
@@ -159,9 +159,9 @@ img{
 }
 
 #content-separator{
-    height: 7vh;
-    background-color: whitesmoke;
-    width: 96%;
+    height: 3vh;
+    background-image: linear-gradient(to bottom right, rgb(32, 201, 192), aquamarine, aqua);
+    width: 98%;
     margin: auto;
     border-radius: 40px;
     border: 2px solid lightskyblue;
@@ -194,7 +194,7 @@ img{
 #img-separator-side-nav{
     background-color: #fc581d;
     width: 90%;
-    height: 2px;
+    height: 3px;
     margin: auto;
 }
 

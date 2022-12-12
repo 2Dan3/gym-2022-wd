@@ -14,6 +14,7 @@ main{
     display: flex;
     flex-wrap: wrap;
     border: 3px solid rgb(231, 231, 231);
+    border-color: gray;
 }
 
 .fit-cent{
@@ -161,7 +162,9 @@ img{
 #footer{
     margin: 0.5%;
     background-color: lightblue;
+    background-image: linear-gradient(to bottom right, rgb(32, 201, 192), aquamarine, aqua);
     border: 3px solid rgb(231, 231, 231);
+    border-color: gray;
 }
 
 #scroller{

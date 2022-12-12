@@ -4,10 +4,13 @@ body *::selection{
 
 header{
     height: 45px;
-    background-color: lightskyblue;
+    background-image: linear-gradient(to bottom right, rgb(32, 201, 192), aquamarine, aqua);
+    /* background-color: rgb(238, 100, 100); */
+    /* background-color: rgb(255, 166, 0); */
+    /* background-color: rgb(20, 255, 177); */
     /* width: 96%; */
     margin: 0 auto 0;
-    border: 3px solid rgb(231, 231, 231);
+    border: 3px solid gray;
     margin: 0.5%;
     text-align: center;
 }
@@ -24,7 +27,7 @@ header ul li{
 
 header ul li button{
     padding: 7px;
-    background-image: linear-gradient(to bottom right, orange, #fc581d);
+    background-image: linear-gradient(to bottom right, rgb(255, 187, 0), #fc581d);
     color: whitesmoke;
     font-size: large;
     font-weight: bold;

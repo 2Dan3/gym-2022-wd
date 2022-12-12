@@ -31,18 +31,49 @@ password_field.setAttribute('type', 'password');
 password_field.setAttribute('placeholder', 'Password');
 registerform.appendChild(password_field);
 
+var email_field = document.createElement('input');
+email_field.setAttribute('name', 'email');
+email_field.setAttribute('type', 'email');
+email_field.setAttribute('placeholder', 'Email');
+registerform.appendChild(email_field);
+
+var first_name_field = document.createElement('input');
+first_name_field.setAttribute('name', 'name');
+first_name_field.setAttribute('type', 'text');
+first_name_field.setAttribute('placeholder', 'Name');
+registerform.appendChild(first_name_field);
+
+var last_name_field = document.createElement('input');
+last_name_field.setAttribute('name', 'surname');
+last_name_field.setAttribute('type', 'text');
+last_name_field.setAttribute('placeholder', 'Surname');
+registerform.appendChild(first_name_field);
+
+var address_field = document.createElement('input');
+address_field.setAttribute('name', 'address');
+address_field.setAttribute('type', 'text');
+address_field.setAttribute('placeholder', 'Address');
+registerform.appendChild(address_field);
+
+var phone_field = document.createElement('input');
+phone_field.setAttribute('name', 'phone');
+phone_field.setAttribute('type', 'phone');
+phone_field.setAttribute('placeholder', 'Phone Num.');
+registerform.appendChild(phone_field);
+
+var birth_field = document.createElement('input');
+birth_field.setAttribute('name', 'birth');
+birth_field.setAttribute('type', 'date');
+birth_field.setAttribute('placeholder', 'Date of birth');
+registerform.appendChild(birth_field);
+
 var register_btn = document.createElement('button');
 register_btn.onclick = do_register;
 register_btn.textContent = 'Sign up';
 registerform.appendChild(register_btn);
 
-// var p_login = document.createElement('p');
-// p_login.classList.add('login-btn');
-// p_login.textContent = 'Already a member?';
-//     // p_reg.onclick = do_login;
-// registerform.appendChild(p_login);
 
-// *TODO: getElementsByClassName + map this event listener to each elem
+// getElementsByClassName + map this event listener to each elem
 var register_buttons = document.getElementsByClassName('register-btn'); 
 [].forEach.call(register_buttons, (register_button_found) => {
     register_button_found.addEventListener('click', (e) => { 
@@ -57,7 +88,7 @@ var register_buttons = document.getElementsByClassName('register-btn');
 
 var closeHintText = document.createElement('div');
 closeHintText.setAttribute('id', 'close-hint-text');
-closeHintText.textContent = 'Hide'
+closeHintText.textContent = 'X'
 overlay.appendChild(closeHintText);
 
 overlay.addEventListener('click', (e) => {

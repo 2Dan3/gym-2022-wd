@@ -33,7 +33,7 @@ async function finish_users_rendering(response){
         for (let id_key in response) {
             let user_obj = response[id_key];
             // console.log(fc_obj);
-            makeUserCard(user_obj);
+            makeUserCard(id_key, user_obj);
         }
         // alert("Successfully rendered!");
         // }, 2000);
@@ -72,7 +72,7 @@ async function request_all_users(){
 }
 
 
-function makeUserCard(userObj){
+function makeUserCard(id, userObj){
     // setTimeout(()=>{}, 1000);
     var mainContentDiv = usersContent;
     
@@ -100,7 +100,7 @@ function makeUserCard(userObj){
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');
     aElement.setAttribute('id', 'see-more-link');
-    aElement.setAttribute('href', './user.html');
+    aElement.setAttribute('href', './user.html?id=' + id);
     // Alternatively (for older browsers) aElement.innerHtml
     aElement.textContent = "@".concat(userObj.korisnickoIme);
     cardTopLeftDiv.appendChild(aElement);
@@ -176,7 +176,7 @@ async function finish_fitness_center_rendering(response){
         for (let id_key in response) {
             let fc_obj = response[id_key];
             // console.log(fc_obj);
-            makeFitCenterCard(fc_obj);
+            makeFitCenterCard(id_key, fc_obj);
         }
         // alert("Successfully rendered!");
         // }, 2000);
@@ -207,7 +207,7 @@ async function request_all_fitness_centers(){
 }
 
 
-function makeFitCenterCard(fc){
+function makeFitCenterCard(id, fc){
     // setTimeout(()=>{}, 1000);
     var mainContentDiv = fcsContent;
     
@@ -235,7 +235,7 @@ function makeFitCenterCard(fc){
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');
     aElement.setAttribute('id', 'see-more-link');
-    aElement.setAttribute('href', './fitcenter.html');
+    aElement.setAttribute('href', './fitcenter.html?id=' + id);
     // Alternatively (for older browsers) aElement.innerHtml
     aElement.textContent = fc.naziv;
     cardTopLeftDiv.appendChild(aElement);

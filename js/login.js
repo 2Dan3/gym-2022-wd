@@ -106,6 +106,7 @@ function checkCredentials(response_users, username, password){
             createSession(user);
             resetAndHideLogin();
             location.reload();
+            alert("You are signed in as " + username);
 
             return
         }

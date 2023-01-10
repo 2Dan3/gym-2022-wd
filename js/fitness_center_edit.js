@@ -11,44 +11,41 @@ load_fitness_center();
 
 async function load_fitness_center(){
     
-    const loaded_fc = await request_fitness_center(null);
+    let id = getParamValue4('id');
+
+    const loaded_fc = await request_fitness_center(id);
     // alert("Loading chosen fitness center...");
-    
-        finish_fitness_center_rendering(loaded_fc);
 }
 
-async function finish_fitness_center_rendering(loaded_fc){
+async function finish_fitness_center_rendering(id, loaded_fc){
     // setTimeout(() => {
-        makeFitCenterCard(loaded_fc);
+        makeFitCenterCard(id, loaded_fc);
         // alert("Successfully rendered!");
         // }, 2000);
 }
 
-async function request_fitness_center(fc_to_load){
+async function request_fitness_center(id){
+    
+    let request = new XMLHttpRequest();
 
-    // *TODO: load from Firebase URL instead
-    const response_fc =
-    {"fc_id":1, "fc_name":"Pumpin' Iron", "fc_address":"Neka Tamo 58a, Novi Sad, 21000", "fc_est":2006, "fc_pic":"../assets/gympic.png", "fc_tr_num":3, "fc_memb_price":2490, "fc_ratings_avg":4.5, "fc_ratings_num":2};
+    request.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                let fc = JSON.parse(request.responseText);
+                // console.log(fc);
+                finish_fitness_center_rendering(id, fc); 
+                return fc;
+            }else {
+                console.error('Error loading the Fitness Center.')
+            }
+        }
+    }
 
-    return response_fc;
+    request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/fitnesCentri/' + id + '.json');
+    request.send();
 }
 
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var fc = JSON.parse(request.responseText);
-            // finish_fitness_center_rendering(fc); 
-
-        // }else {
-        //     console.error('Error loading the Fitness Center.')
-        // }
-    // }
-// }
-
-// request.open('GET', FC_URL);
-// request.send();
-
-function makeFitCenterCard(fc){
+function makeFitCenterCard(id, fc){
     
     var fitCentForm = document.getElementById('edit-form');
     fitCentForm.style.width = '56vh';
@@ -64,18 +61,18 @@ function makeFitCenterCard(fc){
     });
 
     var nameFCinput = document.getElementById('see-more-link');
-    nameFCinput.value = fc.fc_name;
+    nameFCinput.value = fc.naziv;
 
     var inputEst = document.getElementById('est');
-    inputEst.value = fc.fc_est;
+    inputEst.value = fc.godinaOtvaranja;
 
     var cardMiddlePic = document.getElementById('mid-img');
-    cardMiddlePic.setAttribute('src', fc.fc_pic);
+    cardMiddlePic.setAttribute('src', fc.slika);
 
     var cardBottomThirdDiv = document.getElementById('address');
-    cardBottomThirdDiv.value = fc.fc_address;
+    cardBottomThirdDiv.value = fc.adresa;
     var cardBottomFourthDiv = document.getElementById('price');
-    cardBottomFourthDiv.value = fc.fc_memb_price;
+    cardBottomFourthDiv.value = fc.mesecnaClanarina;
     cardBottomFourthDiv.style.marginTop = '10px';
 
     // var submitBtn = document.getElementById('submit-edit');
@@ -96,4 +93,20 @@ function to_users_page(){
 }
 function to_homepage(){
     window.location.href = "index.html";
+}
+
+function getParamValue4(name) {
+    var location = decodeURI(window.location.toString());
+    var index = location.indexOf("?") + 1;
+    var subs = location.substring(index, location.length);
+    var splitted = subs.split("&");
+
+    for (i = 0; i < splitted.length; i++) {
+        var s = splitted[i].split("=");
+        var pName = s[0];
+        var pValue = s[1];
+        if (pName == name) {
+            return pValue;
+        }
+    }
 }

@@ -1,56 +1,49 @@
 // var main_content = document.getElementById('content');
 // main_content.style.display = 'block';
 
-// var FC_URL = "https://jsonplaceholder.typicode.com/photos"
+const FC_URL = "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app"
 // var TRAINING_URL = "https://jsonplaceholder.typicode.com/photos"
-
-// Kada se ucita stranica ucitaju se svi FC sa servera
-// var request = new XMLHttpRequest();
 
 load_fitness_center();
 
 async function load_fitness_center(){
-    
-    const loaded_fc = await request_fitness_center(null);
+    let id_fc = getParamValue('id');
+
+    const loaded_fc = await request_fitness_center(id_fc);
     // alert("Loading chosen fitness center...");
-    setTimeout(() => {
-        finish_fitness_center_rendering(loaded_fc);
-    }, 600);
-
-}
-
-async function finish_fitness_center_rendering(loaded_fc){
     // setTimeout(() => {
-        makeFitCenterCard(loaded_fc);
-        // alert("Successfully rendered!");
-        // }, 2000);
+        // finish_fitness_center_rendering(loaded_fc);
+    // }, 600);
+
 }
 
-async function request_fitness_center(fc_to_load){
-
-    // *TODO: load from Firebase URL instead
-    const response_fc =
-    {"fc_id":1, "fc_name":"Pumpin' Iron", "fc_address":"Neka Tamo 58a, Novi Sad, 21000", "fc_est":2006, "fc_pic":"../assets/gympic.png", "fc_tr_num":3, "fc_memb_price":2490, "fc_ratings_avg":4.5, "fc_ratings_num":2};
-
-    return response_fc;
+async function finish_fitness_center_rendering(id_key, loaded_fc){
+    
+    makeFitCenterCard(id_key, loaded_fc);
 }
 
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var fc = JSON.parse(request.responseText);
-            // finish_fitness_center_rendering(fc); 
+async function request_fitness_center(id){
 
-        // }else {
-        //     console.error('Error loading the Fitness Center.')
-        // }
-    // }
-// }
+    let request = new XMLHttpRequest();
 
-// request.open('GET', FC_URL);
-// request.send();
+    request.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                let fc = JSON.parse(request.responseText);
+                // console.log(fc);
+                finish_fitness_center_rendering(id, fc); 
+                return fc;
+            }else {
+                console.error('Error loading the Fitness Center.')
+            }
+        }
+    }
 
-function makeFitCenterCard(fc){
+    request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/fitnesCentri/' + id + '.json');
+    request.send();
+}
+
+function makeFitCenterCard(id, fc){
     // setTimeout(()=>{}, 1000);
     var mainContentDiv = document.getElementById('content');
     
@@ -77,7 +70,7 @@ function makeFitCenterCard(fc){
     var editImg = document.createElement('img');
     editImg.setAttribute('class', 'edit-img');
     editImg.setAttribute('src', '../assets/edit.jpg');
-    editImg.addEventListener('click', () => { window.location.href = "editfitnesscenter.html";});
+    editImg.addEventListener('click', () => { window.location.href = "editfitnesscenter.html?id=" + id;});
     cardTopEditDiv.appendChild(editImg);
     cardTopDiv.appendChild(cardTopEditDiv);
 
@@ -87,19 +80,19 @@ function makeFitCenterCard(fc){
     aElement.setAttribute('id', 'see-more-link');
     // aElement.setAttribute('href', './fitcenter.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = fc.fc_name;
+    aElement.textContent = fc.naziv;
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
     cardTopRightDiv.classList.add('card-top-right');
-    cardTopRightDiv.textContent = "Est. " + fc.fc_est;
+    cardTopRightDiv.textContent = "Est. " + fc.godinaOtvaranja;
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
     var cardMiddleDiv = document.createElement('div');
     cardMiddleDiv.classList.add('card-middle');
     var cardMiddlePic = document.createElement('img');
-    cardMiddlePic.setAttribute('src', fc.fc_pic);
+    cardMiddlePic.setAttribute('src', fc.slika);
     cardMiddleDiv.appendChild(cardMiddlePic);
     cardContentWrapper.appendChild(cardMiddleDiv);
 
@@ -107,12 +100,12 @@ function makeFitCenterCard(fc){
     cardBottomDiv.classList.add('card-bottom');
     var cardBottomLeftDiv = document.createElement('div');
     cardBottomLeftDiv.classList.add('card-bottom-left');
-    cardBottomLeftDiv.textContent = fc.fc_ratings_num + " people rated this gym!";
+    cardBottomLeftDiv.textContent = fc.ocene.length + " people rated this gym!";
     cardBottomDiv.appendChild(cardBottomLeftDiv);
 
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = fc.fc_ratings_avg.toFixed(1);
+    cardBottomRightDiv.textContent = fc.prosecnaOcena.toFixed(2);
     // 
     var starRatingPic = document.createElement('img');
     starRatingPic.setAttribute('src', '../assets/star.jpg');
@@ -122,15 +115,15 @@ function makeFitCenterCard(fc){
 
     var cardBottomThirdDiv = document.createElement('div');
     cardBottomThirdDiv.classList.add('card-bottom-third');
-    cardBottomThirdDiv.textContent = fc.fc_address;
+    cardBottomThirdDiv.textContent = fc.adresa;
     cardBottomDiv.appendChild(cardBottomThirdDiv);
     var cardBottomPriceDiv = document.createElement('div');
     cardBottomPriceDiv.classList.add('card-bottom-price');
-    cardBottomPriceDiv.textContent = "Membership price: " + fc.fc_memb_price;
+    cardBottomPriceDiv.textContent = "Membership price: " + fc.mesecnaClanarina;
     cardBottomDiv.appendChild(cardBottomPriceDiv);
     var cardBottomFourthDiv = document.createElement('div');
     cardBottomFourthDiv.classList.add('card-bottom-fourth');
-    cardBottomFourthDiv.textContent = "< " + fc.fc_tr_num + " trainings >";
+    cardBottomFourthDiv.textContent = "< " + fc.brojDostupnihTreninga + " trainings >";
     // 
     cardBottomFourthDiv.onclick = () => { 
         cardBottomFourthDiv.style.display = 'none';
@@ -253,3 +246,19 @@ function to_homepage(){
 //     fc_ratings_num
 // }
 // var newFitC = new fitness_center
+
+function getParamValue(name) {
+    var location = decodeURI(window.location.toString());
+    var index = location.indexOf("?") + 1;
+    var subs = location.substring(index, location.length);
+    var splitted = subs.split("&");
+
+    for (i = 0; i < splitted.length; i++) {
+        var s = splitted[i].split("=");
+        var pName = s[0];
+        var pValue = s[1];
+        if (pName == name) {
+            return pValue;
+        }
+    }
+}

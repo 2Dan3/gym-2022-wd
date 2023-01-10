@@ -7,42 +7,42 @@
 load_user();
 
 async function load_user(){
-    
-    const response = await request_user()
-        finish_user_rendering(response);
+
+    let id = getParamValue2('id');
+
+    const response = await request_user(id);
+    //   ...
 }
 
-async function finish_user_rendering(user){
+async function finish_user_rendering(id, user){
     // setTimeout(() => {
-        makeUserCard(user);
+        makeUserCard(id, user);
         // alert("Successfully rendered!");
         // }, 2000);
 }
 
-async function request_user(){
+async function request_user(id){
 
-    const response_user =
-    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"1966-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"};
+    let request = new XMLHttpRequest();
 
-    return response_user;
+    request.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                let user = JSON.parse(request.responseText);
+                // console.log(user);
+                makeUserCard(id, user); 
+                return user;
+            }else {
+                console.error('Error loading the User.')
+            }
+        }
+    }
+
+    request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/korisnici/' + id + '.json');
+    request.send();
 }
 
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var users = JSON.parse(request.responseText);
-            // finish_users_rendering(users); 
-
-        // }else {
-        //     console.error('Error loading Users.')
-        // }
-    // }
-// }
-
-// request.open('GET', USERS_URL);
-// request.send();
-
-function makeUserCard(userObj){
+function makeUserCard(id, userObj){
 
     var userForm = document.getElementById('edit-form');
     userForm.addEventListener('submit', (e) => {
@@ -60,16 +60,16 @@ function makeUserCard(userObj){
 
     var usernameInput = document.getElementById('see-more-link');
     usernameInput.style.maxWidth = '60%';
-    usernameInput.value = userObj.us_username;
+    usernameInput.value = userObj.korisnickoIme;
     
     var birthInput = document.getElementById('birth-input');
-    birthInput.value = userObj.us_birth;
+    birthInput.value = userObj.datumRodjenja;
 
     var phoneInput = document.getElementById('phone-input');
-    phoneInput.value = userObj.us_phone;
+    phoneInput.value = userObj.telefon;
     
     var emailInput = document.getElementById('email-input');
-    emailInput.value = userObj.us_email;
+    emailInput.value = userObj.email;
 }
 
 
@@ -83,4 +83,20 @@ function to_users_page(){
 }
 function to_homepage(){
     window.location.href = "index.html";
+}
+
+function getParamValue2(name) {
+    var location = decodeURI(window.location.toString());
+    var index = location.indexOf("?") + 1;
+    var subs = location.substring(index, location.length);
+    var splitted = subs.split("&");
+
+    for (i = 0; i < splitted.length; i++) {
+        var s = splitted[i].split("=");
+        var pName = s[0];
+        var pValue = s[1];
+        if (pName == name) {
+            return pValue;
+        }
+    }
 }

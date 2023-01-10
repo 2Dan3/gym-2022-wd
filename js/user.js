@@ -8,46 +8,42 @@ load_users();
 
 async function load_users(){
     
-    const response_array = await request_all_users()
+    let user_id = getParamValue1('id');
+
+    const response_array = await request_user(user_id)
     // alert("Loading all fitness centers...");
-    setTimeout(() => {
-        finish_users_rendering(response_array);
-    }, 600);
-
-}
-
-async function finish_users_rendering(users_array){
     // setTimeout(() => {
-        users_array.map(makeUserCard);
-        // alert("Successfully rendered!");
-        // }, 2000);
+    //     finish_users_rendering(response_array);
+    // }, 600);
+
 }
 
-async function request_all_users(){
-
-    const response_users = [
-    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"1966-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
-    ];
-
-    return response_users;
+async function finish_users_rendering(id, user){
+    makeUserCard(id, user);
 }
 
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var users = JSON.parse(request.responseText);
-            // finish_users_rendering(users); 
+async function request_user(id) {
 
-        // }else {
-        //     console.error('Error loading Users.')
-        // }
-    // }
-// }
+    let request = new XMLHttpRequest();
 
-// request.open('GET', USERS_URL);
-// request.send();
+    request.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                let user = JSON.parse(request.responseText);
+                // console.log(user);
+                finish_users_rendering(id, user); 
+                return user;
+            }else {
+                console.error('Error loading the User.')
+            }
+        }
+    }
 
-function makeUserCard(userObj){
+    request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/korisnici/' + id + '.json');
+    request.send();
+}
+
+function makeUserCard(id, userObj){
     // setTimeout(()=>{}, 1000);
     var mainContentDiv = document.getElementById('content');
     
@@ -69,7 +65,7 @@ function makeUserCard(userObj){
     var editImg = document.createElement('img');
     editImg.setAttribute('class', 'edit-img');
     editImg.setAttribute('src', '../assets/edit.jpg');
-    editImg.addEventListener('click', () => { window.location.href = "edituser.html";});
+    editImg.addEventListener('click', () => { window.location.href = "edituser.html?id=" + id;});
     cardTopEditDiv.appendChild(editImg);
     cardTopDiv.appendChild(cardTopEditDiv);
     
@@ -79,19 +75,19 @@ function makeUserCard(userObj){
     aElement.setAttribute('id', 'see-more-link');
     // aElement.setAttribute('href', './user.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = "@".concat(userObj.us_username);
+    aElement.textContent = "@".concat(userObj.korisnickoIme);
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
     cardTopRightDiv.classList.add('card-top-right');
-    cardTopRightDiv.textContent = userObj.us_birth;
+    cardTopRightDiv.textContent = userObj.datumRodjenja;
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
     var cardMiddleDiv = document.createElement('div');
     cardMiddleDiv.classList.add('card-middle');
     var cardMiddlePic = document.createElement('img');
-    cardMiddlePic.setAttribute('src', userObj.us_pic);
+    cardMiddlePic.setAttribute('src', '../assets/defaultuser.png');
     cardMiddleDiv.appendChild(cardMiddlePic);
     cardContentWrapper.appendChild(cardMiddleDiv);
 
@@ -99,12 +95,12 @@ function makeUserCard(userObj){
     cardBottomDiv.classList.add('card-bottom');
     var cardBottomLeftDiv = document.createElement('div');
     cardBottomLeftDiv.classList.add('card-bottom-left');
-    cardBottomLeftDiv.textContent = userObj.us_phone;
+    cardBottomLeftDiv.textContent = userObj.telefon;
     
     cardBottomDiv.appendChild(cardBottomLeftDiv);
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = userObj.us_email;
+    cardBottomRightDiv.textContent = userObj.email;
     cardBottomDiv.appendChild(cardBottomRightDiv);
     cardContentWrapper.appendChild(cardBottomDiv);
 }
@@ -128,5 +124,21 @@ function ban_user(username){
 
         alert("@" + username + " has been successfully deleted.");
         location.reload();
+    }
+}
+
+function getParamValue1(name) {
+    var location = decodeURI(window.location.toString());
+    var index = location.indexOf("?") + 1;
+    var subs = location.substring(index, location.length);
+    var splitted = subs.split("&");
+
+    for (i = 0; i < splitted.length; i++) {
+        var s = splitted[i].split("=");
+        var pName = s[0];
+        var pValue = s[1];
+        if (pName == name) {
+            return pValue;
+        }
     }
 }

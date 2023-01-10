@@ -1,5 +1,5 @@
-// var USERS_URL = "https://jsonplaceholder.typicode.com/photos"
-// var FC_URL = "https://jsonplaceholder.typicode.com/photos"
+const USERS_URL = "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app";
+const FC_URL = "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app";
 
 // Kada se ucita stranica ucitaju se svi USERS sa servera
 // var request = new XMLHttpRequest();
@@ -27,39 +27,50 @@ async function load_users(){
 
 }
 
-async function finish_users_rendering(users_array){
+async function finish_users_rendering(response){
     // setTimeout(() => {
-        users_array.map(makeUserCard);
+        // users_array.map(makeUserCard);
+        for (var id_key in response) {
+            var user_obj = response[id_key];
+            // console.log(fc_obj);
+            makeUserCard(user_obj);
+        }
         // alert("Successfully rendered!");
         // }, 2000);
 }
 
 async function request_all_users(){
 
-    const response_users = [
-    {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"1966-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
-    {"us_name":"Zyzz", "us_surname":"King", "us_address":"Nova Ulicica 23, Novi Sad, 21000", "us_birth":"1989-10-11", "us_pic":"../assets/defaultuser.png", "us_phone":"+38164987321", "us_email":"zyzzy@yahoo.com", "us_username":"YungZz", "us_password":"ZyZZy*P4sS975"},
-    {"us_name":"Arnold", "us_surname":"Schwarzenegger", "us_address":"Trg Novih Ulica 32, Novi Sad, 21000", "us_birth":"1947-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381659993332", "us_email":"arny@hotmail.com", "us_username":"ArnySchwarz1", "us_password":"ArNy*P4sS420"},
-    {"us_name":"Andrew", "us_surname":"Tate", "us_address":"Ulica Stara 8, Novi Sad, 21000", "us_birth":"1986-12-14", "us_pic":"../assets/defaultuser.png", "us_phone":"+381698887773", "us_email":"tate@yahoo.com", "us_username":"TaTe28", "us_password":"TaTe*P4sS4220"},
-    ];
+    // const response_users = [
+    // {"us_name":"Mike", "us_surname":"Tyson", "us_address":"Neka Tamo 19, Novi Sad, 21000", "us_birth":"1966-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381612327879", "us_email":"mikey@gmail.com", "us_username":"mikesfury", "us_password":"MiK3*P4sS864"},
+    // {"us_name":"Zyzz", "us_surname":"King", "us_address":"Nova Ulicica 23, Novi Sad, 21000", "us_birth":"1989-10-11", "us_pic":"../assets/defaultuser.png", "us_phone":"+38164987321", "us_email":"zyzzy@yahoo.com", "us_username":"YungZz", "us_password":"ZyZZy*P4sS975"},
+    // {"us_name":"Arnold", "us_surname":"Schwarzenegger", "us_address":"Trg Novih Ulica 32, Novi Sad, 21000", "us_birth":"1947-06-30", "us_pic":"../assets/defaultuser.png", "us_phone":"+381659993332", "us_email":"arny@hotmail.com", "us_username":"ArnySchwarz1", "us_password":"ArNy*P4sS420"},
+    // {"us_name":"Andrew", "us_surname":"Tate", "us_address":"Ulica Stara 8, Novi Sad, 21000", "us_birth":"1986-12-14", "us_pic":"../assets/defaultuser.png", "us_phone":"+381698887773", "us_email":"tate@yahoo.com", "us_username":"TaTe28", "us_password":"TaTe*P4sS4220"},
+    // ];
+
+    
+    var response_users;
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                response_users = JSON.parse(req.responseText);
+                console.log(response_users);
+                finish_users_rendering(response_users);
+            }else {
+                console.error('Error loading Users.')
+                return null
+            }
+        }
+    }
+
+    req.open('GET',  USERS_URL+ '/korisnici.json');
+    req.send();
 
     return response_users;
 }
 
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var users = JSON.parse(request.responseText);
-            // finish_users_rendering(users); 
-
-        // }else {
-        //     console.error('Error loading Users.')
-        // }
-    // }
-// }
-
-// request.open('GET', USERS_URL);
-// request.send();
 
 function makeUserCard(userObj){
     // setTimeout(()=>{}, 1000);
@@ -81,7 +92,7 @@ function makeUserCard(userObj){
     var banImg = document.createElement('img');
     banImg.setAttribute('class', 'ban-img');
     banImg.setAttribute('src', '../assets/banuser.jpg');
-    banImg.addEventListener('click', () => ban_user(userObj.us_username));
+    banImg.addEventListener('click', () => ban_user(userObj.korisnickoIme));
     cardTopBanDiv.appendChild(banImg);
     cardTopDiv.appendChild(cardTopBanDiv);
     // 
@@ -91,7 +102,7 @@ function makeUserCard(userObj){
     aElement.setAttribute('id', 'see-more-link');
     aElement.setAttribute('href', './user.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = "@".concat(userObj.us_username);
+    aElement.textContent = "@".concat(userObj.korisnickoIme);
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
@@ -116,16 +127,16 @@ function makeUserCard(userObj){
     
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = userObj.us_email;
+    cardBottomRightDiv.textContent = userObj.email;
     cardBottomDiv.appendChild(cardBottomRightDiv);
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
 function ban_user(username){
-    if (confirm("Ban @"+ username + "?")){
+    if (confirm("Remove @"+ username + "?")){
         // *TODO: DELETE HTTP Req
 
-        alert("@" + username + " has been successfully deleted.");
+        alert("@" + username + " has been successfully removed.");
         location.reload();
     }
 }
@@ -154,48 +165,47 @@ async function load_fitness_centers(){
     const response_array = await request_all_fitness_centers()
     // alert("Loading all fitness centers...");
     // setTimeout(() => {
-        finish_fitness_center_rendering(response_array);
+        // finish_fitness_center_rendering(response_array);
     // }, 600);
 
 }
 
-async function finish_fitness_center_rendering(fc_array){
+async function finish_fitness_center_rendering(response){
     // setTimeout(() => {
-        fc_array.map(makeFitCenterCard);
+        // fc_array.map(makeFitCenterCard);
+        for (var id_key in response) {
+            var fc_obj = response[id_key];
+            // console.log(fc_obj);
+            makeFitCenterCard(fc_obj);
+        }
         // alert("Successfully rendered!");
         // }, 2000);
 }
 
 async function request_all_fitness_centers(){
 
-    const response_fitness_centers = [
-    {"fc_id":1, "fc_name":"Pumpin' Iron", "fc_address":"Neka Tamo 58a, Novi Sad, 21000", "fc_est":2006, "fc_pic":"../assets/gympic.png", "fc_tr_num":3, "fc_memb_price":2490, "fc_ratings_avg":4.5, "fc_ratings_num":2},
-    {"fc_id":2, "fc_name":"Leg-go!", "fc_address":"Trg Novih Ulica 11, Novi Sad, 21000", "fc_est":1998, "fc_pic":"../assets/gympic2.jpg", "fc_tr_num":2, "fc_memb_price":2099, "fc_ratings_avg":4.0, "fc_ratings_num":3},
-    {"fc_id":3, "fc_name":"Load", "fc_address":"Nova Ulicica 11, Novi Sad, 21000", "fc_est":2001, "fc_pic":"../assets/gympic3.png", "fc_tr_num":2, "fc_memb_price":2690, "fc_ratings_avg":4.0, "fc_ratings_num":3},
-    {"fc_id":4, "fc_name":"Armed&Ready", "fc_address":"Trg Novih Ulica 83, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic4.png", "fc_tr_num":3, "fc_memb_price":2890, "fc_ratings_avg":5, "fc_ratings_num":1},
-    {"fc_id":5, "fc_name":'Drop \'em!', "fc_address":"Ulica Nova 27b, Novi Sad, 21000", "fc_est":2011, "fc_pic":"../assets/gympic5.jpg", "fc_tr_num":1, "fc_memb_price":1990, "fc_ratings_avg":4.5, "fc_ratings_num":2},
-    {"fc_id":6, "fc_name":"Walk the talk", "fc_address":"Ulica Stara 71, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic6.png", "fc_tr_num":1, "fc_memb_price":1890, "fc_ratings_avg":3.67, "fc_ratings_num":3},
-    {"fc_id":7, "fc_name":"Testosterone", "fc_address":"Ulicica Starija 19a, Novi Sad, 21000", "fc_est":2022, "fc_pic":"../assets/gympic7.jpg", "fc_tr_num":2, "fc_memb_price":2790, "fc_ratings_avg":4.0, "fc_ratings_num":1},
-    {"fc_id":8, "fc_name":"Stronger than yesterday", "fc_address":"Ulicica Skorasnja 29, Novi Sad, 21000", "fc_est":2021, "fc_pic":"../assets/gympic8.png", "fc_tr_num":2, "fc_memb_price":2090, "fc_ratings_avg":4, "fc_ratings_num":1},
-    ];
+    var response_fitness_centers;
+
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                response_fitness_centers = JSON.parse(req.responseText);
+                console.log(response_fitness_centers);
+                finish_fitness_center_rendering(response_fitness_centers);
+            }else {
+                console.error('Error loading Fitness Centers.')
+                return null
+            }
+        }
+    }
+
+    req.open('GET', FC_URL + '/fitnesCentri.json');
+    req.send();
 
     return response_fitness_centers;
 }
 
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var fcs = JSON.parse(request.responseText);
-            // finish_fitness_center_rendering(fcs); 
-
-        // }else {
-        //     console.error('Error loading Fitness Centers.')
-        // }
-    // }
-// }
-
-// request.open('GET', FC_URL);
-// request.send();
 
 function makeFitCenterCard(fc){
     // setTimeout(()=>{}, 1000);
@@ -217,7 +227,7 @@ function makeFitCenterCard(fc){
     var delImg = document.createElement('img');
     delImg.setAttribute('class', 'ban-img');
     delImg.setAttribute('src', '../assets/banuser.jpg');
-    delImg.addEventListener('click', () => delete_fc(fc.fc_name));
+    delImg.addEventListener('click', () => delete_fc(fc.naziv));
     cardTopDelDiv.appendChild(delImg);
     cardTopDiv.appendChild(cardTopDelDiv);
     // 
@@ -227,7 +237,7 @@ function makeFitCenterCard(fc){
     aElement.setAttribute('id', 'see-more-link');
     aElement.setAttribute('href', './fitcenter.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = fc.fc_name;
+    aElement.textContent = fc.naziv;
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
@@ -255,16 +265,16 @@ function makeFitCenterCard(fc){
     cardBottomDiv.appendChild(cardBottomLeftDiv);
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = fc.fc_ratings_avg.toFixed(1);
+    cardBottomRightDiv.textContent = fc.prosecnaOcena.toFixed(2);
     cardBottomDiv.appendChild(cardBottomRightDiv);
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
 function delete_fc(name){
-    if (confirm("Delete gym \""+ name + "\"?")){
+    if (confirm("Remove gym \""+ name + "\"?")){
         // *TODO: DELETE HTTP Req
 
-        alert("Gym" + name + " has been successfully deleted.");
+        alert("Gym " + name + " has been successfully removed.");
         location.reload();
     }
 }

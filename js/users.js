@@ -30,8 +30,8 @@ async function load_users(){
 async function finish_users_rendering(response){
     // setTimeout(() => {
         // users_array.map(makeUserCard);
-        for (var id_key in response) {
-            var user_obj = response[id_key];
+        for (let id_key in response) {
+            let user_obj = response[id_key];
             // console.log(fc_obj);
             makeUserCard(user_obj);
         }
@@ -173,8 +173,8 @@ async function load_fitness_centers(){
 async function finish_fitness_center_rendering(response){
     // setTimeout(() => {
         // fc_array.map(makeFitCenterCard);
-        for (var id_key in response) {
-            var fc_obj = response[id_key];
+        for (let id_key in response) {
+            let fc_obj = response[id_key];
             // console.log(fc_obj);
             makeFitCenterCard(fc_obj);
         }

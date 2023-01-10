@@ -18,8 +18,8 @@ async function load_fitness_centers(){
 
 async function finish_fitness_center_rendering(response){
     // setTimeout(() => {
-        for (var id_key in response) {
-            var fc_obj = response[id_key];
+        for (let id_key in response) {
+            let fc_obj = response[id_key];
             // console.log(fc_obj);
             makeFitCenterCard(fc_obj);
         }

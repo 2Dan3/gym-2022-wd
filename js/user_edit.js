@@ -77,7 +77,7 @@ function makeUserCard(id, userObj){
     phoneInput.value = userObj.telefon;
     
     var emailInput = document.getElementById('email-input');
-    emailInput.setAttribute('class', 'edit-user-field');
+    emailInput.setAttribute('class', 'edit-user-field');``
     emailInput.value = userObj.email;
 }
 
@@ -107,7 +107,7 @@ function getParamValue2(name) {
         if (pName == name) {
             return pValue;
         }
-    }
+    }``
 }
 
 function isFormValid(){

@@ -73,7 +73,11 @@ async function do_login(){
 
     let username_input = document.getElementById("username-login-field").value;
     let password_input = document.getElementById("password-login-field").value;
-    // *TODO: Form validity check - error if empty or invalid
+
+    if ( !isFormValid(username_input, password_input) ) {
+        alert("Not all fields were filled!");
+        return;
+    }
 
     let response_users;
 
@@ -124,6 +128,14 @@ function resetAndHideLogin(){
     loginform.reset();
     //  +
     loginform.style.display = 'none';
+}
+
+function isFormValid(username, password){
+    
+    if (username == "" || password == "") {
+        return false;
+    }
+    return true;
 }
 // function show_login_form(){
 //     console.log('login showed');

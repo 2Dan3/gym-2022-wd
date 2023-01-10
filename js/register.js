@@ -22,48 +22,56 @@ registerform.appendChild(h1);
 var username_field = document.createElement('input');
 username_field.setAttribute('name', 'username');
 username_field.setAttribute('type', 'text');
+username_field.setAttribute('class', 'register-field');
 username_field.setAttribute('placeholder', 'Username');
 registerform.appendChild(username_field);
 
 var password_field = document.createElement('input');
 password_field.setAttribute('name', 'password');
 password_field.setAttribute('type', 'password');
+password_field.setAttribute('class', 'register-field');
 password_field.setAttribute('placeholder', 'Password');
 registerform.appendChild(password_field);
 
 var email_field = document.createElement('input');
 email_field.setAttribute('name', 'email');
 email_field.setAttribute('type', 'email');
+email_field.setAttribute('class', 'register-field');
 email_field.setAttribute('placeholder', 'Email');
 registerform.appendChild(email_field);
 
 var first_name_field = document.createElement('input');
 first_name_field.setAttribute('name', 'name');
 first_name_field.setAttribute('type', 'text');
+first_name_field.setAttribute('class', 'register-field');
 first_name_field.setAttribute('placeholder', 'Name');
 registerform.appendChild(first_name_field);
 
 var last_name_field = document.createElement('input');
 last_name_field.setAttribute('name', 'surname');
 last_name_field.setAttribute('type', 'text');
+last_name_field.setAttribute('class', 'register-field');
 last_name_field.setAttribute('placeholder', 'Surname');
 registerform.appendChild(first_name_field);
 
 var address_field = document.createElement('input');
 address_field.setAttribute('name', 'address');
 address_field.setAttribute('type', 'text');
+address_field.setAttribute('class', 'register-field');
 address_field.setAttribute('placeholder', 'Address');
 registerform.appendChild(address_field);
 
 var phone_field = document.createElement('input');
 phone_field.setAttribute('name', 'phone');
 phone_field.setAttribute('type', 'phone');
+phone_field.setAttribute('class', 'register-field');
 phone_field.setAttribute('placeholder', 'Phone Num.');
 registerform.appendChild(phone_field);
 
 var birth_field = document.createElement('input');
 birth_field.setAttribute('name', 'birth');
 birth_field.setAttribute('type', 'date');
+birth_field.setAttribute('class', 'register-field');
 birth_field.setAttribute('placeholder', 'Date of birth');
 registerform.appendChild(birth_field);
 
@@ -101,9 +109,22 @@ overlay.addEventListener('click', (e) => {
 registerform.addEventListener('click', (e) => { e.stopPropagation(); });
 
 function do_register(){
-    // *TODO: Form validity check - error if empty or invalid
-    // *TODO: Store logged info inside localStorage
-    alert("register request SENT");
+    if ( !isFormValid() ) {
+        alert("Not all fields were filled!");
+        return;
+    }
+    console.log("register requested");
+}
+
+function isFormValid(){
+    let register_fields = document.getElementsByClassName('register-field');
+    for (let i = 0; i < register_fields.length; i++) {
+        const field = register_fields[i];
+        if (field.value == undefined || field.value == null || field.value == "") {
+            return false;
+        }
+    }
+    return true;
 }
 // function show_register_form(){
 //     console.log('register showed');

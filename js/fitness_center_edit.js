@@ -51,6 +51,12 @@ function makeFitCenterCard(id, fc){
     fitCentForm.style.width = '56vh';
     fitCentForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        if ( !isFormValid() ) {
+            alert("Not all fields were filled!");
+            return;
+        }
+
         if (window.confirm("Are you sure you want to save the changes?") == true) {
             alert("Changes are saved!");
             // TODO: call save func
@@ -61,18 +67,22 @@ function makeFitCenterCard(id, fc){
     });
 
     var nameFCinput = document.getElementById('see-more-link');
+    nameFCinput.setAttribute('class', 'edit-fc-field');
     nameFCinput.value = fc.naziv;
 
     var inputEst = document.getElementById('est');
+    inputEst.setAttribute('class', 'edit-fc-field');
     inputEst.value = fc.godinaOtvaranja;
 
     var cardMiddlePic = document.getElementById('mid-img');
     cardMiddlePic.setAttribute('src', fc.slika);
 
     var cardBottomThirdDiv = document.getElementById('address');
+    cardBottomThirdDiv.setAttribute('class', 'edit-fc-field');
     cardBottomThirdDiv.value = fc.adresa;
     var cardBottomFourthDiv = document.getElementById('price');
     cardBottomFourthDiv.value = fc.mesecnaClanarina;
+    cardBottomFourthDiv.setAttribute('class', 'edit-fc-field');
     cardBottomFourthDiv.style.marginTop = '10px';
 
     // var submitBtn = document.getElementById('submit-edit');
@@ -109,4 +119,16 @@ function getParamValue4(name) {
             return pValue;
         }
     }
+}
+
+function isFormValid(){
+
+    let fields = document.getElementsByClassName('edit-fc-field');
+    for (let i = 0; i < fields.length; i++) {
+        const field = fields[i];
+        if (field.value == undefined || field.value == null || field.value == "") {
+            return false;
+        }
+    }
+    return true;
 }

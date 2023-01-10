@@ -47,6 +47,12 @@ function makeUserCard(id, userObj){
     var userForm = document.getElementById('edit-form');
     userForm.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        if ( !isFormValid() ) {
+            alert("Not all fields were filled!");
+            return;
+        }
+
         if (window.confirm("Are you sure you want to save the changes?") == true) {
             alert("Changes are saved!");
             // TODO: call save func
@@ -63,12 +69,15 @@ function makeUserCard(id, userObj){
     usernameInput.value = userObj.korisnickoIme;
     
     var birthInput = document.getElementById('birth-input');
+    birthInput.setAttribute('class', 'edit-user-field');
     birthInput.value = userObj.datumRodjenja;
 
     var phoneInput = document.getElementById('phone-input');
+    phoneInput.setAttribute('class', 'edit-user-field');
     phoneInput.value = userObj.telefon;
     
     var emailInput = document.getElementById('email-input');
+    emailInput.setAttribute('class', 'edit-user-field');
     emailInput.value = userObj.email;
 }
 
@@ -99,4 +108,16 @@ function getParamValue2(name) {
             return pValue;
         }
     }
+}
+
+function isFormValid(){
+
+    let fields = document.getElementsByClassName('edit-user-field');
+    for (let i = 0; i < fields.length; i++) {
+        const field = fields[i];
+        if (field.value == undefined || field.value == null || field.value == "") {
+            return false;
+        }
+    }
+    return true;
 }

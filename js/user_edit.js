@@ -48,7 +48,7 @@ function makeUserCard(id, userObj){
     userForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        if ( !isFormValid() ) {
+        if ( !isUserFormValid() ) {
             alert("Not all fields were filled!");
             return;
         }
@@ -110,7 +110,7 @@ function getParamValue2(name) {
     }``
 }
 
-function isFormValid(){
+function isUserFormValid(){
 
     let fields = document.getElementsByClassName('edit-user-field');
     for (let i = 0; i < fields.length; i++) {

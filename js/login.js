@@ -74,7 +74,7 @@ async function do_login(){
     let username_input = document.getElementById("username-login-field").value;
     let password_input = document.getElementById("password-login-field").value;
 
-    if ( !isFormValid(username_input, password_input) ) {
+    if ( !isLoginFormValid(username_input, password_input) ) {
         alert("Not all fields were filled!");
         return;
     }
@@ -130,9 +130,8 @@ function resetAndHideLogin(){
     loginform.style.display = 'none';
 }
 
-function isFormValid(username, password){
-    
-    if (username == "" || password == "") {
+function isLoginFormValid(username, password){
+    if (this.username === "" || this.password === "") {
         return false;
     }
     return true;

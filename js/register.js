@@ -109,14 +109,14 @@ overlay.addEventListener('click', (e) => {
 registerform.addEventListener('click', (e) => { e.stopPropagation(); });
 
 function do_register(){
-    if ( !isFormValid() ) {
+    if ( !isRegFormValid() ) {
         alert("Not all fields were filled!");
         return;
     }
     console.log("register requested");
 }
 
-function isFormValid(){
+function isRegFormValid(){
     let register_fields = document.getElementsByClassName('register-field');
     for (let i = 0; i < register_fields.length; i++) {
         const field = register_fields[i];

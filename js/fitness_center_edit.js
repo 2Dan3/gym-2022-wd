@@ -52,7 +52,7 @@ function makeFitCenterCard(id, fc){
     fitCentForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        if ( !isFormValid() ) {
+        if ( !isFCFormValid() ) {
             alert("Not all fields were filled!");
             return;
         }
@@ -121,7 +121,7 @@ function getParamValue4(name) {
     }
 }
 
-function isFormValid(){
+function isFCFormValid(){
 
     let fields = document.getElementsByClassName('edit-fc-field');
     for (let i = 0; i < fields.length; i++) {

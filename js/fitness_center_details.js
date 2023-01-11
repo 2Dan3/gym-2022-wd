@@ -128,7 +128,7 @@ function makeFitCenterCard(id, fc){
     cardBottomFourthDiv.onclick = () => { 
         cardBottomFourthDiv.style.display = 'none';
         trainingsListDiv.style.display = 'block';
-        load_trainings(null);
+        load_trainings(fc.idTreninga);
         
         // fitCentDiv.style.position = 'fixed';
         // fitCentDiv.style.left = '5%'
@@ -139,36 +139,40 @@ function makeFitCenterCard(id, fc){
 }
 
 
-async function load_trainings(wanted_trainings){
+async function load_trainings(group_id){
     
-    const response_array = await request_all_trainings(wanted_trainings)
+    const response_array = await request_all_trainings(group_id)
     // alert("Loading the trainings...");
-    setTimeout(() => {
-        finish_training_rendering(response_array);
-    }, 600);
-
 }
 
-async function finish_training_rendering(training_array){
-    // setTimeout(() => {
-        training_array.map(makeTrainingCard);
-        // alert("Successfully rendered!");
-        // }, 2000);
+async function finish_training_rendering(group_id, response){
+    for (const id_key in response) {
+        makeTrainingCard(group_id, id_key, response[id_key]);
+    }
 }
 
-async function request_all_trainings(wanted_trainings){
+async function request_all_trainings(wanted_trainings_group_id){
+    
+    let request = new XMLHttpRequest();
 
-    // *TODO: load wanted_trainings from firebase URL instead
-    const response_trainings = [
-    {"tr_id":1, "tr_name":"Training 1", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":25, "tr_type":"YOGA", "tr_max_capacity":18, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum."},
-    {"tr_id":2, "tr_name":"Training 2", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":35, "tr_type":"BODY PUMP", "tr_max_capacity":24, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum."},
-    {"tr_id":3, "tr_name":"Training 3", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":45, "tr_type":"AEROBIC", "tr_max_capacity":32, "tr_long_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum."},
-    ];
+    request.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                let trainings = JSON.parse(request.responseText);
+                // console.log(tr);
+                finish_training_rendering(wanted_trainings_group_id ,trainings); 
+                return trainings;
+            }else {
+                console.error('Error loading Trainings for the Fitness Center.')
+            }
+        }
+    }
 
-    return response_trainings;
+    request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/treninzi/' + wanted_trainings_group_id + '.json');
+    request.send();
 }
 
-function makeTrainingCard(training){
+function makeTrainingCard(group_id, id, training){
     // TRAINING LIST IS FILLED HERE
     var trainingsListDiv = document.getElementById('trainings-list');
     
@@ -186,14 +190,14 @@ function makeTrainingCard(training){
     cardTopLeftDiv.classList.add('card-top-left');
     var aElement = document.createElement('a');
     aElement.setAttribute('id', 'see-more-link');
-    aElement.setAttribute('href', './training.html');
+    aElement.setAttribute('href', './training.html?group=' + group_id + '&id=' + id);
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = training.tr_name;
+    aElement.textContent = training.naziv;
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
     cardTopRightDiv.classList.add('card-top-right');
-    cardTopRightDiv.textContent = "~" + training.tr_duration + "m";
+    cardTopRightDiv.textContent = "~" + training.trajanje + "m";
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
@@ -206,18 +210,18 @@ function makeTrainingCard(training){
 
     var cardLongDescription = document.createElement('div');
     cardLongDescription.classList.add('card-long-description');
-    cardLongDescription.textContent = training.tr_long_description;
+    cardLongDescription.textContent = training.kratakOpis;
     cardContentWrapper.appendChild(cardLongDescription);
 
     var cardBottomDiv = document.createElement('div');
     cardBottomDiv.classList.add('card-bottom');
     var cardBottomLeftDiv = document.createElement('div');
     cardBottomLeftDiv.classList.add('card-bottom-left');
-    cardBottomLeftDiv.textContent = training.tr_type;
+    cardBottomLeftDiv.textContent = training.zanr;
     cardBottomDiv.appendChild(cardBottomLeftDiv);
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = "Max. people: " + training.tr_max_capacity;
+    cardBottomRightDiv.textContent = "Max. people: " + training.maxOsobe;
     cardBottomDiv.appendChild(cardBottomRightDiv);
     cardContentWrapper.appendChild(cardBottomDiv);
 }

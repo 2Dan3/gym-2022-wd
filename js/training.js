@@ -4,15 +4,18 @@
 // Kada se ucita stranica ucitaja se Trening sa servera
 // var request = new XMLHttpRequest();
 
-load_training(null);
+var single_tr_id = getParamValue0('id');
+var tr_group_id = getParamValue0('group');
 
-async function load_training(wanted_training){
+load_training(single_tr_id, tr_group_id);
+
+async function load_training(wanted_training_id, tr_group_id){
     
-    const response_training = await request_training(wanted_training)
+    const response_training = await request_training(wanted_training_id, tr_group_id)
     // alert("Loading the training...");
-    setTimeout(() => {
-        finish_training_rendering(response_training);
-    }, 600);
+    // setTimeout(() => {
+        // finish_training_rendering(response_training);
+    // }, 600);
 
 }
 
@@ -23,29 +26,26 @@ async function finish_training_rendering(loaded_training){
         // }, 2000);
 }
 
-async function request_training(wanted_training){
+async function request_training(chosen_training_id, tr_group_id){
+    
+    let request = new XMLHttpRequest();
 
-    // *TODO: load wanted_training from Firebase URL instead
-    const response_training =
-    {"tr_id":1, "tr_name":"Training 1", "tr_short_description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.", "tr_duration":25, "tr_type":"YOGA", "tr_max_capacity":18, "tr_long_description":"Long Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem omnis quibusdam ipsam illum laborum, aperiam inventore perspiciatis voluptatibus necessitatibus aliquid modi eius, voluptas unde laboriosam nisi itaque architecto aspernatur ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing elit."};
+    request.onreadystatechange = function() {
+        if(this.readyState == 4) {
+            if(this.status == 200) {
+                let training = JSON.parse(request.responseText);
+                // console.log(training);
+                finish_training_rendering(training); 
+                return training;
+            }else {
+                console.error('Error loading chosen Training.')
+            }
+        }
+    }
 
-    return response_training;
+    request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/treninzi/' + tr_group_id +'/' + chosen_training_id + '.json');
+    request.send();
 }
-
-// request.onreadystatechange = function() {
-    // if(this.readyState == 4) {
-    //     if(this.status == 200) {
-            // var trainings = JSON.parse(request.responseText);
-            // finish_training_rendering(trainings); 
-
-        // }else {
-        //     console.error('Error loading Trainings.')
-        // }
-    // }
-// }
-
-// request.open('GET', TRAINING_URL);
-// request.send();
 
 function makeTrainingCard(training){
     // setTimeout(()=>{}, 1000);
@@ -68,12 +68,12 @@ function makeTrainingCard(training){
     aElement.setAttribute('id', 'see-more-link');
     // aElement.setAttribute('href', './training.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = training.tr_name;
+    aElement.textContent = training.naziv;
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');
     cardTopRightDiv.classList.add('card-top-right');
-    cardTopRightDiv.textContent = "~" + training.tr_duration + "m";
+    cardTopRightDiv.textContent = "~" + training.trajanje + "m";
     cardTopDiv.appendChild(cardTopRightDiv);
     cardContentWrapper.appendChild(cardTopDiv);
 
@@ -88,18 +88,18 @@ function makeTrainingCard(training){
 
     var cardLongDescription = document.createElement('div');
     cardLongDescription.classList.add('card-long-description');
-    cardLongDescription.textContent = training.tr_long_description;
+    cardLongDescription.textContent = training.opis;
     cardContentWrapper.appendChild(cardLongDescription);
 
     var cardBottomDiv = document.createElement('div');
     cardBottomDiv.classList.add('card-bottom');
     var cardBottomLeftDiv = document.createElement('div');
     cardBottomLeftDiv.classList.add('card-bottom-left');
-    cardBottomLeftDiv.textContent = training.tr_type;
+    cardBottomLeftDiv.textContent = training.zanr;
     cardBottomDiv.appendChild(cardBottomLeftDiv);
     var cardBottomRightDiv = document.createElement('div');
     cardBottomRightDiv.classList.add('card-bottom-right');
-    cardBottomRightDiv.textContent = "Max. people: " + training.tr_max_capacity;
+    cardBottomRightDiv.textContent = "Max. people: " + training.maxOsobe;
     cardBottomDiv.appendChild(cardBottomRightDiv);
     cardContentWrapper.appendChild(cardBottomDiv);
 }
@@ -114,4 +114,20 @@ function to_users_page(){
 }
 function to_homepage(){
     window.location.href = "index.html";
+}
+
+function getParamValue0(name) {
+    var location = decodeURI(window.location.toString());
+    var index = location.indexOf("?") + 1;
+    var subs = location.substring(index, location.length);
+    var splitted = subs.split("&");
+
+    for (i = 0; i < splitted.length; i++) {
+        var s = splitted[i].split("=");
+        var pName = s[0];
+        var pValue = s[1];
+        if (pName == name) {
+            return pValue;
+        }
+    }
 }

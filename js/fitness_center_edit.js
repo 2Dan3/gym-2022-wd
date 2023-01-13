@@ -58,12 +58,44 @@ function makeFitCenterCard(id, fc){
         }
 
         if (window.confirm("Are you sure you want to save the changes?") == true) {
-            alert("Changes are saved!");
-            // TODO: call save func
+            
+            let naziv = document.getElementById('see-more-link').value.trim();
+            let godinaOtvaranja = document.getElementById('est').value;
+            let adresa = document.getElementById('address').value.trim();
+            let mesecnaClanarina = document.getElementById('price').value;
+            fc_edited = 
+            {   
+                "naziv":naziv,
+                "adresa":adresa,
+                "godinaOtvaranja":godinaOtvaranja,
+                "slika":fc.slika,
+                "brojDostupnihTreninga":fc.brojDostupnihTreninga,
+                "mesecnaClanarina":mesecnaClanarina,
+                "idTreninga":fc.idTreninga,
+                "prosecnaOcena":fc.prosecnaOcena,
+                "ocene":fc.ocene
+            };
+
+            var req = new XMLHttpRequest();
+
+            req.onreadystatechange = function() {
+                if(this.readyState == 4) {
+                    if(this.status == 200) {
+                        alert("Changes were saved!");
+                    }else {
+                        console.error('Error editing Gym.');
+                        alert("An error occured while editing gym.");
+                    }
+                    to_homepage();
+                }
+            }
+            // console.log("form obj: " + JSON.stringify(fc_edited));
+            req.open('PUT',  'https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app' + '/fitnesCentri/' + id + '.json');
+            req.send(JSON.stringify(fc_edited));
         }else{
-            alert("Changes are not saved!");
+            alert("Changes were canceled.");
         }
-        to_homepage();
+        
     });
 
     var nameFCinput = document.getElementById('see-more-link');

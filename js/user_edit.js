@@ -54,12 +54,42 @@ function makeUserCard(id, userObj){
         }
 
         if (window.confirm("Are you sure you want to save the changes?") == true) {
-            alert("Changes are saved!");
-            // TODO: call save func
+            
+            let username = document.getElementById('see-more-link').value.trim();
+            let birth = document.getElementById('birth-input').value.toString();
+            let phone = document.getElementById('phone-input').value.toString();
+            let email = document.getElementById('email-input').value;
+            user_edited = 
+            {   
+                "adresa":userObj.adresa,
+                "datumRodjenja":birth,
+                "email":email,
+                "ime":userObj.ime,
+                "lozinka":userObj.lozinka,
+                "prezime":userObj.prezime,
+                "telefon":phone,
+                "korisnickoIme":username
+            };
+
+            var req = new XMLHttpRequest();
+
+            req.onreadystatechange = function() {
+                if(this.readyState == 4) {
+                    if(this.status == 200) {
+                        alert("Changes were saved!");
+                    }else {
+                        console.error('Error editing User.');
+                        alert("An error occured while editing User.");
+                    }
+                    to_users_page();
+                }
+            }
+            // console.log("form obj: " + JSON.stringify(user_edited));
+            req.open('PUT',  'https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app' + '/korisnici/' + id + '.json');
+            req.send(JSON.stringify(user_edited));
         }else{
-            alert("Changes are not saved!");
+            alert("Changes were canceled.");
         }
-        to_users_page();
     });
     userForm.style.width = "70%";
     userForm.style.maxWidth = "60vh";

@@ -158,7 +158,6 @@ function do_register(){
                 console.error('Error creating User.');
                 alert("An error occured while registering User.");
             }
-            alert("check console & network...");
             to_users_page();
         }
     }

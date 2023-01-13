@@ -1,3 +1,5 @@
+manageHeaderSignIn();
+
 var overlay = document.getElementById('overlay');
 if (overlay == null) {
 overlay = document.createElement('div');
@@ -136,13 +138,15 @@ function isLoginFormValid(username, password){
     }
     return true;
 }
-// function show_login_form(){
-//     console.log('login showed');
-//     overlay.style.display = 'block';
-//     setTimeout(() => {
-//         document.body.addEventListener('click', (e) => { overlay.style.display = 'none'; });
-//         overlay.addEventListener('click', (e) => { e.stopPropagation(); });
 
-//     }, 1000);
-    
-// }
+function manageHeaderSignIn(){
+    if (localStorage.getItem('logged') == true) {
+        // *TODO: 
+        //      make sign-in btn 
+        //      set existing fn on click 
+    }else{
+        // *TODO: 
+        //      make sign-out btn or just rename existing sign-in one 
+        //      set logout fn on click 
+    }
+}

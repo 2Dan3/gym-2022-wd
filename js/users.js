@@ -92,7 +92,7 @@ function makeUserCard(id, userObj){
     var banImg = document.createElement('img');
     banImg.setAttribute('class', 'ban-img');
     banImg.setAttribute('src', '../assets/banuser.jpg');
-    banImg.addEventListener('click', () => ban_user(userObj.korisnickoIme));
+    banImg.addEventListener('click', () => ban_user(userObj.korisnickoIme, id));
     cardTopBanDiv.appendChild(banImg);
     cardTopDiv.appendChild(cardTopBanDiv);
     // 
@@ -132,12 +132,24 @@ function makeUserCard(id, userObj){
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
-function ban_user(username){
+async function ban_user(username, id){
     if (confirm("Remove @"+ username + "?")){
-        // *TODO: DELETE HTTP Req
+        var req = new XMLHttpRequest();
+        
+        req.onreadystatechange = function() {
+            if(this.readyState == 4) {
+                if(this.status == 200) {
+                    alert("@" + username + " has been successfully removed.");
+                    location.reload();
+                }else {
+                    console.error('Error deleting User.');
+                    alert("An error occured while removing User.");
+                }
+            }
+        }
 
-        alert("@" + username + " has been successfully removed.");
-        location.reload();
+        req.open('DELETE',  USERS_URL+ '/korisnici/' + id + '.json');
+        req.send();
     }
 }
 
@@ -227,7 +239,7 @@ function makeFitCenterCard(id, fc){
     var delImg = document.createElement('img');
     delImg.setAttribute('class', 'ban-img');
     delImg.setAttribute('src', '../assets/banuser.jpg');
-    delImg.addEventListener('click', () => delete_fc(fc.naziv));
+    delImg.addEventListener('click', () => delete_fc(fc.naziv, id));
     cardTopDelDiv.appendChild(delImg);
     cardTopDiv.appendChild(cardTopDelDiv);
     // 
@@ -270,12 +282,25 @@ function makeFitCenterCard(id, fc){
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
-function delete_fc(name){
+async function delete_fc(name, id){
     if (confirm("Remove gym \""+ name + "\"?")){
-        // *TODO: DELETE HTTP Req
 
-        alert("Gym " + name + " has been successfully removed.");
-        location.reload();
+        var req = new XMLHttpRequest();
+
+        req.onreadystatechange = function() {
+            if(this.readyState == 4) {
+                if(this.status == 200) {
+                    alert("Gym " + name + " has been successfully removed.");
+                    location.reload();
+                }else {
+                    console.error('Error deleting Gym.');
+                    alert("An error occured while deleting gym.");
+                }
+            }
+        }
+
+        req.open('DELETE',  FC_URL+ '/fitnesCentri/' + id + '.json');
+        req.send();
     }
 }
 

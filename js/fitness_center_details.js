@@ -224,8 +224,10 @@ function updateData(avg_rating, all_ratings, given_rating) {
     let reviews_num_div = document.getElementsByClassName('card-bottom-left')[0];
     reviews_num_div.textContent = all_ratings.length + " people rated this gym!";
 
-    let given_rating_reviews_div = document.getElementById(given_rating);
-    given_rating_reviews_div.textContent = all_ratings.filter( (current_rating) => { current_rating === given_rating; } ).length + ' reviews.'
+    let given_rating_reviews_div = document.getElementsByName(given_rating.toString())[0];
+    
+    let filtered_ratings = all_ratings.filter( (current_rating) => { return current_rating == given_rating; } );
+    given_rating_reviews_div.textContent = filtered_ratings.length + ' reviews.'
 }
 
 function makeRatingCard(id_key, loaded_fc){
@@ -240,11 +242,11 @@ function makeRatingCard(id_key, loaded_fc){
         star_input.setAttribute('type', 'radio');
         star_input.setAttribute('name', 'rating');
         star_input.setAttribute('value', i);
-        star_input.setAttribute('id', i);
 
         let star_label = document.createElement('label');
         star_label.setAttribute('for', i);
         star_label.setAttribute('class', 'rating-star-label');
+        // star_label.setAttribute('name', i);
         star_label.textContent = '☆';
         star_label.onclick = () => 
         {
@@ -277,7 +279,7 @@ function makeRatingCard(id_key, loaded_fc){
 
         let right_review_column = document.createElement('div');
         right_review_column.setAttribute('class', 'right-review-column');
-        right_review_column.setAttribute('id', i);
+        right_review_column.setAttribute('name', i);
 
         let num_of_specified_grades = 0;
 

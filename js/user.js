@@ -75,7 +75,7 @@ function makeUserCard(id, userObj){
     aElement.setAttribute('id', 'see-more-link');
     // aElement.setAttribute('href', './user.html');
     // Alternatively (for older browsers) aElement.innerHtml
-    aElement.textContent = "@".concat(userObj.korisnickoIme);
+    aElement.textContent = userObj.korisnickoIme;
     cardTopLeftDiv.appendChild(aElement);
     cardTopDiv.appendChild(cardTopLeftDiv);
     var cardTopRightDiv = document.createElement('div');

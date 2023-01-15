@@ -19,14 +19,13 @@ main{
 
 .fit-cent{
     height: fit-content;
-    /*               CHECK                */
-    width: 158vh;
-    max-width: 100%;
+    width: 48vh;
     margin: 10px auto;
     /* margin: 10px 5px; */
     background-image: linear-gradient(to top left, #fd885d, darkblue);
     border-radius: 5px;
     border: 2px solid whitesmoke;
+    max-width: 100%;
 }
 .fit-cent:hover{
     box-shadow: 10px 10px 10px rgb(0, 0, 63);
@@ -41,10 +40,6 @@ main{
     margin: 10px;
     background-color: whitesmoke;
     height: fit-content;
-    /*               CHECK                */
-    display: flex;
-    /*               CHECK                */
-    flex-wrap: wrap;
 }
 
 .card-top{
@@ -72,19 +67,21 @@ main{
 
 .card-middle{
     margin: 10px auto;
-    width: 94%;
+    /* width: 38%; */
     border-radius: 3px;
+    min-width: 70%;
+    
 }
 .card-middle, .card-middle img{
-    height: 346px;
-
+    height: 40vw;
+    justify-content: center;
 }
-
 .card-middle img{
     /* max-height: 40%; */
     border-radius: 20px;
-    width: 99%;
-    margin: auto;
+    width: 90%;
+    margin: auto 5%;
+    border: 3px solid whitesmoke;
 }
 
 .card-bottom{
@@ -117,29 +114,29 @@ main{
 }
 
 #see-more-link{
-    width: fit-content;
+    /* width: fit-content; */
     text-decoration: none;
     font-weight: bold;
     color: gray;
     font-size: x-large;
 }
-#see-more-link:hover{
+/* #see-more-link:hover{
     text-decoration: underline;
     color: black;
     transition: all .3s ease-in-out;
-}
+} */
 
 img{
     border: 1px solid lightblue;
     margin: auto;
 }
 
-#star-rating{
+/* #star-rating{
     width: 40px;
     border-radius: 50%;
     border: none;
     margin-top: 3px;
-}
+} */
 
 .card-top-edit, .edit-img{
     width: 30px;
@@ -157,7 +154,7 @@ img{
     color: whitesmoke;
     font-size: x-large;
     cursor: pointer;
-    margin: 10px 30px;
+    margin: 10px 20px;
 }
 #submit-edit:hover{
     box-shadow: 0 5px 5px black;
@@ -173,29 +170,41 @@ img{
     border-color: gray;
 }
 
-#scroller{
-    margin: 10px;
-    background-color: darkblue;
-    color: white;
+#edit-form{
+    margin: 10px auto;
+}
+#edit-form *{
+    display: block;
+    font-weight: bold;
     font-size: x-large;
-    cursor: pointer;
 }
-#scroller:hover{
-    border: 3px solid white;
+#edit-form input, #edit-form label, #edit-form textarea{
+    margin: 20px auto;
+    width: 84%;
 }
-
+#edit-form input, #edit-form label{
+    text-align: center;
+}
+#edit-form textarea{
+    resize: none;
+}
 
 @media screen and (max-width:600px) {
     .fit-cent{
         width: 100%;
     }
-    .user-card{
-        width: 92%;
+    .card-middle img{
+        min-width: 100%;
+        margin: auto auto;
     }
-    .card-middle, .card-middle img{
-        height: 12em;
+    .card-middle{
+        min-width: 80%;
     }
 }
+
+/* @media screen and (max-width:946px) {
+
+} */
 
 @media screen and (max-width:946px) {
     .fit-cent{

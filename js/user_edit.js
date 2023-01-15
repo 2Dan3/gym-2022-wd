@@ -59,14 +59,17 @@ function makeUserCard(id, userObj){
             let birth = document.getElementById('birth-input').value.toString();
             let phone = document.getElementById('phone-input').value.toString();
             let email = document.getElementById('email-input').value;
+            let address = document.getElementById('address-input').value.toString();
+            let name = document.getElementById('name-input').value.trim();
+            let surname = document.getElementById('surname-input').value.trim();
             user_edited = 
             {   
-                "adresa":userObj.adresa,
+                "adresa":address,
                 "datumRodjenja":birth,
                 "email":email,
-                "ime":userObj.ime,
+                "ime":name,
                 "lozinka":userObj.lozinka,
-                "prezime":userObj.prezime,
+                "prezime":surname,
                 "telefon":phone,
                 "korisnickoIme":username
             };
@@ -109,6 +112,17 @@ function makeUserCard(id, userObj){
     var emailInput = document.getElementById('email-input');
     emailInput.setAttribute('class', 'edit-user-field');``
     emailInput.value = userObj.email;
+
+    var nameInput = document.getElementById('name-input');
+    // nameInput.style.maxWidth = '60%';
+    nameInput.value = userObj.ime;
+
+    var surnameInput = document.getElementById('surname-input');
+    // surnameInput.style.maxWidth = '60%';
+    surnameInput.value = userObj.prezime;
+
+    var addressInput = document.getElementById('address-input');
+    addressInput.value = userObj.adresa;
 }
 
 

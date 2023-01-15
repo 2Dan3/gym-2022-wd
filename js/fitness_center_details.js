@@ -102,7 +102,7 @@ async function rate(id, fc_obj, rating) {
                 if(this.readyState == 4) {
                     if(this.status == 200) {
                         console.log("Rated '"+ fc_obj.naziv + "' with " + rating + " stars.");
-                        refreshAvgRating(fc_obj.prosecnaOcena);
+                        updateData(fc_obj.prosecnaOcena, fc_obj.ocene.length);
                     }else {
                         console.error('Error rating the Gym.');
                         alert("An error occured while rating gym.");
@@ -210,7 +210,7 @@ function makeFitCenterCard(id, fc){
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
-function refreshAvgRating(avg_rating) {
+function updateData(avg_rating, review_num) {
     let avg_rating_div = document.getElementsByClassName('card-bottom-right')[0]
     avg_rating_div.textContent = avg_rating.toFixed(2);
 
@@ -219,6 +219,10 @@ function refreshAvgRating(avg_rating) {
     starRatingPic.setAttribute('src', '../assets/star.jpg');
     starRatingPic.setAttribute('id', 'star-rating');
     avg_rating_div.appendChild(starRatingPic);
+    // 
+
+    let reviews_num_div = document.getElementsByClassName('card-bottom-left')[0];
+    reviews_num_div.textContent = review_num + " people rated this gym!";
 }
 
 function makeRatingCard(id_key, loaded_fc){

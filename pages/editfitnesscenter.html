@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit</title>
-    <link rel="stylesheet" href="../styles/homepage.css">
+    <link rel="stylesheet" href="../styles/editfitcenter.css">
     <link rel="stylesheet" href="../styles/login.css">
     <link rel="stylesheet" href="../styles/register.css">
     <link rel="stylesheet" href="../styles/header.css">
@@ -27,26 +27,21 @@
     </header>
 
     <main id="content">
+        <div class="card-middle">
+            <img id="mid-img" src="" alt="Gym Image"/>
+        </div>
         <form method="post" id="edit-form" class="fit-cent">
             <div class="card-content-wrapper">
 
-                <div class="card-top">
-                    <div class="card-top-left">
+                        <label for="see-more-link">Name:</label>
                         <input type="text" id="see-more-link"/>
-                    </div>
-                    <div class="card-top-right">
-                        Est. 
+                        <label for="est">Year est:</label>
                         <input id="est" type="number" min="1900" max="2022"/>
-                    </div>
-                </div>
-                <div class="card-middle">
-                    <img id="mid-img" src="" alt="Gym Image"/>
-                </div>
-
-                <div class="card-bottom">
+                
+                    <label for="address">Address</label>
                     <textarea name="address" id="address" cols="30" rows="10" class="card-bottom-third"></textarea>
+                    <label for="price">Price:</label>
                     <input type="number" id="price" class="card-bottom-fourth"/>
-                </div>
                 <button type="submit" id="submit-edit">Save</button>
             </div>
         </form>

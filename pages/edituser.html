@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit</title>
 
-    <link rel="stylesheet" href="../styles/users.css">
+    <link rel="stylesheet" href="../styles/edituser.css">
     <link rel="stylesheet" href="../styles/login.css">
     <link rel="stylesheet" href="../styles/register.css">
     <link rel="stylesheet" href="../styles/header.css">
@@ -21,7 +21,6 @@
             <li><button class="login-btn">Sign in</button></li>
             <li><button onclick="to_homepage()">Fitness Places</button></li>
             <li><button onclick="to_users_page()">Users & Gyms</button></li>
-            <!-- <li><button>?</button></li> -->
         </ul>
     </header>
 
@@ -29,23 +28,20 @@
         <form method="post" id="edit-form" class="user-card">
             <div class="card-content-wrapper">
 
-                <div class="card-top">
-                    <div class="card-top-left">
-                        <input type="text" id="see-more-link"/>
-                    </div>
-                    <div class="card-top-right">
-                        <input type="date" name="birthdate" id="birth-input"/>
-                    </div>
-                </div>
-                <!-- <div class="card-middle"> </div> -->
-                <div class="card-bottom">
-                    <div class="card-bottom-left">
-                        <input type="tel" id="phone-input" name="phone"/>
-                    </div>
-                    <div class="card-bottom-right">
-                        <input type="text" id="email-input" name="email"/>
-                    </div>
-                </div>
+                <label for="see-more-link">Username:</label>
+                <input type="text" id="see-more-link"/>
+                <label for="birth-input">Birthday:</label>
+                <input type="date" name="birthdate" id="birth-input"/>
+                <label for="phone-input">Phone:</label>
+                <input type="tel" id="phone-input" name="phone"/>
+                <label for="email-input">Email:</label>
+                <input type="text" id="email-input" name="email"/>
+                <label for="address-input">Address:</label>
+                <textarea id="address-input" name="address"></textarea>
+                <label for="name-input">Name:</label>
+                <input type="text" id="name-input" name="name"/>
+                <label for="surname-input">Surname:</label>
+                <input type="text" id="surname-input" name="surname"/>
                 <button type="submit" id="submit-edit">Save</button>
 
             </div>

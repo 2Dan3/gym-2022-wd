@@ -1,9 +1,10 @@
-
+        /* RATING STARS INTERACTION */
 .rating {
 display: flex;
 flex-direction: row-reverse;
 justify-content: center;
 margin: auto;
+width: 100%;
 }
 
 .rating > input{ display:none;}
@@ -32,3 +33,30 @@ opacity:1;
 }
 
 .rating:hover > input:checked ~ label:before{ opacity: 0.4; }
+
+        /* REVIEW CARDS DISPLAY */
+
+#reviews-wrapper{
+    display: block;
+    width: 100%;
+}
+
+.review-row{
+    width: 100%;
+    /* display: block; */
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: bold;
+    font-size: xx-large;
+    color: darkblue;
+}
+.left-review-column{
+    width: 49%;
+    text-align: left;
+    margin-left: 5px;
+    font-style: italic;
+}
+.right-review-column{
+    width: 49%;
+    text-align: right;
+}

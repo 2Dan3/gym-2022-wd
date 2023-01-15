@@ -102,7 +102,7 @@ async function rate(id, fc_obj, rating) {
                 if(this.readyState == 4) {
                     if(this.status == 200) {
                         console.log("Rated '"+ fc_obj.naziv + "' with " + rating + " stars.");
-                        updateData(fc_obj.prosecnaOcena, fc_obj.ocene.length);
+                        updateData(fc_obj.prosecnaOcena, fc_obj.ocene, rating);
                     }else {
                         console.error('Error rating the Gym.');
                         alert("An error occured while rating gym.");
@@ -210,11 +210,11 @@ function makeFitCenterCard(id, fc){
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
-function updateData(avg_rating, review_num) {
+function updateData(avg_rating, all_ratings, given_rating) {
     let avg_rating_div = document.getElementsByClassName('card-bottom-right')[0]
     avg_rating_div.textContent = avg_rating.toFixed(2);
 
-    // Bug solve:
+    // Bug solve (recreate & reappend the disappeared star img):
     let starRatingPic = document.createElement('img');
     starRatingPic.setAttribute('src', '../assets/star.jpg');
     starRatingPic.setAttribute('id', 'star-rating');
@@ -222,15 +222,16 @@ function updateData(avg_rating, review_num) {
     // 
 
     let reviews_num_div = document.getElementsByClassName('card-bottom-left')[0];
-    reviews_num_div.textContent = review_num + " people rated this gym!";
+    reviews_num_div.textContent = all_ratings.length + " people rated this gym!";
+
+    let given_rating_reviews_div = document.getElementById(given_rating);
+    given_rating_reviews_div.textContent = all_ratings.filter( (current_rating) => { current_rating === given_rating; } ).length + ' reviews.'
 }
 
 function makeRatingCard(id_key, loaded_fc){
-    grades_appearance_num = get_each_grade_count(loaded_fc.ocene);
+    let grades_appearance_num = get_each_grade_count(loaded_fc.ocene);
     
-    // *TODO:
-    // make card elements
-    //   ...
+    
     let rating_div = document.createElement('div');
     rating_div.setAttribute('class', 'rating');
 
@@ -255,7 +256,43 @@ function makeRatingCard(id_key, loaded_fc){
         rating_div.appendChild(star_label);
     }
     
-    document.getElementsByClassName('card-content-wrapper')[0].appendChild(rating_div);
+    let content_wrapper = document.getElementsByClassName('card-content-wrapper')[0];
+    content_wrapper.appendChild(rating_div);
+
+    // *TODO:
+    // make review cards
+    //   ...
+
+    let reviews_div = document.createElement('div');
+    reviews_div.setAttribute('id', 'reviews-wrapper');
+    content_wrapper.appendChild(reviews_div);
+
+    for (let i = 10; i >= 1; i--) {
+        let review_row = document.createElement('div');
+        review_row.setAttribute('class', 'review-row');
+        reviews_div.appendChild(review_row);
+
+        let left_review_column = document.createElement('div');
+        left_review_column.setAttribute('class', 'left-review-column');
+
+        let right_review_column = document.createElement('div');
+        right_review_column.setAttribute('class', 'right-review-column');
+        right_review_column.setAttribute('id', i);
+
+        let num_of_specified_grades = 0;
+
+        if (grades_appearance_num[i]) {
+            num_of_specified_grades = grades_appearance_num[i];
+        }
+
+        left_review_column.textContent = i + ' star';
+        right_review_column.textContent = num_of_specified_grades + ' reviews.';
+
+        review_row.appendChild(left_review_column);
+        review_row.appendChild(right_review_column);
+    }
+
+    content_wrapper.appendChild(reviews_div);
 }
 
 function disable_rating() {

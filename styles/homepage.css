@@ -182,10 +182,13 @@ img{
 
 @media screen and (max-width:600px) {
     .fit-cent{
-        width: 92%;
+        width: 100%;
     }
     .user-card{
         width: 92%;
+    }
+    .card-middle, .card-middle img{
+        height: 346px;
     }
 }
 

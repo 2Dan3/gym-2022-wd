@@ -20,6 +20,7 @@ async function load_fitness_center(){
 async function finish_fitness_center_rendering(id_key, loaded_fc){
     
     makeFitCenterCard(id_key, loaded_fc);
+    makeRatingCard(id_key, loaded_fc);
 }
 
 async function request_fitness_center(id){
@@ -41,6 +42,77 @@ async function request_fitness_center(id){
 
     request.open('GET', "https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app" + '/fitnesCentri/' + id + '.json');
     request.send();
+}
+
+// get_each_grade_count([10, 10, 9, 10, 1, 3, 10 , 5, 2, 3]);
+
+// function get_all_instances(current_rating) { console.log(current_rating +" "+this);current_rating === this };
+
+function get_each_grade_count(all_ratings){
+
+//     let count = {};
+//     // let rating_appearances = all_ratings.map()
+//     for (const rating of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ) {
+//         console.log(rating);
+//         count[rating] = all_ratings.filter( get_all_instances, rating ).length;
+//     }
+
+    // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(  )
+
+    // all_ratings.filter( (current_grade) => { current_grade === 10 } )
+    let count = {};
+
+    for (const rating of all_ratings) {
+        if (count[rating]) {
+          count[rating] += 1;
+        } else {
+          count[rating] = 1;
+        }
+    }
+    console.log(count);
+    return count;
+}
+
+async function rate(id, fc_obj, rating) {
+
+    // function sum_ratings(total, num) {
+    //     return total + num;
+    // }
+
+    let ratings_num = fc_obj.ocene.push(rating);
+    let ratings_sum = fc_obj.ocene.reduce( (total, num) => {return total + num;} );
+    fc_obj.prosecnaOcena = ratings_sum / ratings_num;
+
+    fc_rated = 
+            {   
+                "naziv":fc_obj.naziv,
+                "adresa":fc_obj.adresa,
+                "godinaOtvaranja":fc_obj.godinaOtvaranja,
+                "slika":fc_obj.slika,
+                "brojDostupnihTreninga":fc_obj.brojDostupnihTreninga,
+                "mesecnaClanarina":fc_obj.mesecnaClanarina,
+                "idTreninga":fc_obj.idTreninga,
+                "prosecnaOcena":fc_obj.prosecnaOcena,
+                "ocene":fc_obj.ocene
+            };
+
+            var req = new XMLHttpRequest();
+
+            req.onreadystatechange = function() {
+                if(this.readyState == 4) {
+                    if(this.status == 200) {
+                        console.log("Rated '"+ fc_obj.naziv + "' with " + rating + " stars.");
+                        refreshAvgRating(fc_obj.prosecnaOcena);
+                    }else {
+                        console.error('Error rating the Gym.');
+                        alert("An error occured while rating gym.");
+                    }
+                    // location.reload();
+                }
+            }
+            // console.log("form obj: " + JSON.stringify(fc_rated));
+            req.open('PUT',  'https://fitnessandusers-default-rtdb.europe-west1.firebasedatabase.app' + '/fitnesCentri/' + id + '.json');
+            req.send(JSON.stringify(fc_rated));
 }
 
 function makeFitCenterCard(id, fc){
@@ -138,6 +210,53 @@ function makeFitCenterCard(id, fc){
     cardContentWrapper.appendChild(cardBottomDiv);
 }
 
+function refreshAvgRating(avg_rating) {
+    let avg_rating_div = document.getElementsByClassName('card-bottom-right')[0]
+    avg_rating_div.textContent = avg_rating.toFixed(2);
+
+    // Bug solve:
+    let starRatingPic = document.createElement('img');
+    starRatingPic.setAttribute('src', '../assets/star.jpg');
+    starRatingPic.setAttribute('id', 'star-rating');
+    avg_rating_div.appendChild(starRatingPic);
+}
+
+function makeRatingCard(id_key, loaded_fc){
+    grades_appearance_num = get_each_grade_count(loaded_fc.ocene);
+    
+    // *TODO:
+    // make card elements
+    //   ...
+    let rating_div = document.createElement('div');
+    rating_div.setAttribute('class', 'rating');
+
+    for (let i = 10; i >= 1; i--) {
+        let star_input = document.createElement('input');
+        star_input.setAttribute('type', 'radio');
+        star_input.setAttribute('name', 'rating');
+        star_input.setAttribute('value', i);
+        star_input.setAttribute('id', i);
+
+        let star_label = document.createElement('label');
+        star_label.setAttribute('for', i);
+        star_label.setAttribute('class', 'rating-star-label');
+        star_label.textContent = '☆';
+        star_label.onclick = () => 
+        {
+            rate(id_key, loaded_fc, i);
+            disable_rating();
+        };
+
+        rating_div.appendChild(star_input);
+        rating_div.appendChild(star_label);
+    }
+    
+    document.getElementsByClassName('card-content-wrapper')[0].appendChild(rating_div);
+}
+
+function disable_rating() {
+    [].forEach.call(document.getElementsByClassName('rating-star-label'), (star) => { star.onclick = () => {alert("You have already rated this gym!");} } );
+}
 
 async function load_trainings(group_id){
     

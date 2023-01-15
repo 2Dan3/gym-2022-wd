@@ -44,6 +44,7 @@
     color: #fc581d;
 }
 #register-form *{
+    max-width: 97%;
     display: block;
     border: 1px solid lightskyblue;
     border-radius: 3px;
@@ -51,6 +52,7 @@
 }
 
 #register-form{
+    max-width: 97%;
     display: none;
     background-color: black;
     /* opacity: 0.9; */

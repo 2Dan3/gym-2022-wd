@@ -43,6 +43,7 @@
     color: #fc581d;
 }
 #login-form *{
+    max-width: 97%;
     display: block;
     border: 1px solid lightskyblue;
     border-radius: 3px;
@@ -58,6 +59,7 @@
     border-top: 2px solid white;
 }
 #login-form{
+    max-width: 97%;
     display: none;
     background-color: black;
     /* opacity: 0.9; */
